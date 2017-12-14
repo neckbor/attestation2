@@ -28,21 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.GridView = new System.Windows.Forms.DataGridView();
+            this.gridView = new System.Windows.Forms.DataGridView();
             this.StartBtn = new System.Windows.Forms.Button();
             this.InpBtn = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.GridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
             this.SuspendLayout();
             // 
-            // GridView
+            // gridView
             // 
-            this.GridView.AllowUserToAddRows = false;
-            this.GridView.AllowUserToDeleteRows = false;
-            this.GridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.GridView.Location = new System.Drawing.Point(12, 12);
-            this.GridView.Name = "GridView";
-            this.GridView.Size = new System.Drawing.Size(240, 150);
-            this.GridView.TabIndex = 1;
+            this.gridView.AllowUserToAddRows = false;
+            this.gridView.AllowUserToDeleteRows = false;
+            this.gridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridView.Location = new System.Drawing.Point(12, 12);
+            this.gridView.Name = "gridView";
+            this.gridView.Size = new System.Drawing.Size(240, 150);
+            this.gridView.TabIndex = 1;
             // 
             // StartBtn
             // 
@@ -73,18 +73,18 @@
             this.ClientSize = new System.Drawing.Size(516, 407);
             this.Controls.Add(this.InpBtn);
             this.Controls.Add(this.StartBtn);
-            this.Controls.Add(this.GridView);
+            this.Controls.Add(this.gridView);
             this.Name = "Form1";
             this.Text = "Раздел 9 номер 4";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.GridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView GridView;
+        private System.Windows.Forms.DataGridView gridView;
         private System.Windows.Forms.Button StartBtn;
         private System.Windows.Forms.Button InpBtn;
     }

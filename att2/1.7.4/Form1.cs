@@ -23,12 +23,20 @@ namespace _1._7._4
 
         private void StartBtn_Click(object sender, EventArgs e)
         {
-            ArrayItemsProizv arrObj = new ArrayItemsProizv(ArrInput.Text);
+            try
+            {
+                ArrayItemsProizv arrObj = new ArrayItemsProizv(ArrInput.Text);
 
-            //double[] mas = ArrayItemsProizv.StrToArray<double>(;
-            //mas[] = StrToArray<double>(str);
+                //double[] mas = ArrayItemsProizv.StrToArray<double>(;
+                //mas[] = StrToArray<double>(str);
 
-            ResultText.Text = arrObj.ItemsProizv();
+                ResultText.Text = arrObj.ItemsProizv();
+            }
+
+            catch (Exception exc)
+            {
+                MessageBsc.ShowError(exc.Message);
+            }
         }
     }
 }

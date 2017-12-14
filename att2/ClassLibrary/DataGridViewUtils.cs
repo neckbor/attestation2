@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace ClassLibrary
 {
-    class DataGridViewUtils
+    public class DataGridViewUtils
     {
         // Инициализация DataGridView для работы с массивами (различные настройки и обработчики событий);
         // при добавление кнопок управления кол-вом строк и столбцов уменьшает размеры DataGridView
@@ -214,5 +214,34 @@ namespace ClassLibrary
             if (dgv.RowCount == 0)
                 dgv.RowCount = 1;
         }
+
+        // Запись данных из массива (одномерного или двухмерного) в DataGridView
+        // (основная реализация, закрытый метод, используется в ArrayToGrid и Array2ToGrid)
+        private static void ArrayToGridInner<T>(DataGridView dgv, Array data)
+        {
+            // выравнивание (если T == int - по правому краю, иначе - по-умолчанию)
+            dgv.DefaultCellStyle.Alignment =
+                typeof(T) == typeof(int) ? DataGridViewContentAlignment.MiddleRight : dgv.DefaultCellStyle.Alignment;
+
+            int rowCount = data.Rank == 1 ? 1 : data.GetLength(0),
+                colCount = data.Rank == 1 ? data.GetLength(0) : data.GetLength(1);
+
+            DataGridViewSelectionMode originalSelectionMode = dgv.SelectionMode;
+            dgv.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            dgv.RowCount = rowCount;
+            dgv.ColumnCount = colCount;
+            dgv.SelectionMode = originalSelectionMode;
+
+            for (int r = 0; r < rowCount; r++)
+                for (int c = 0; c < colCount; c++)
+                    dgv[c, r].Value = data.Rank == 1 ? data.GetValue(c) : data.GetValue(r, c);
+        }
+
+        // Запись данных из списка в DataGridView
+        public static void ListToGrid<T>(DataGridView dgv, IList<T> data)
+        {
+            ArrayToGridInner<T>(dgv, data.ToArray());
+        }
+
     }
 }

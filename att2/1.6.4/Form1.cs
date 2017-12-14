@@ -25,9 +25,17 @@ namespace _1._6._4
 
         private void StartBtn_Click(object sender, EventArgs e)
         {
-            StringModifier revString = new StringModifier(InputText.Text);
+            try
+            {
+                StringModifier revString = new StringModifier(InputText.Text);
 
-            ResultText.Text = revString.StrReverse();
+                ResultText.Text = revString.StrReverse();
+            }
+
+            catch (Exception exc)
+            {
+                MessageBsc.ShowError(exc.Message);
+            }
         }
     }
 }

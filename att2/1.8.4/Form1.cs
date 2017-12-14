@@ -27,9 +27,18 @@ public int IndexOf(IList<int> list, int value)	,
 
         private void StartBtn_Click(object sender, EventArgs e)
         {
-            ListsComparer lstObj = new ListsComparer (List1Input.Text, List2Input.Text);
+            try
+            {
+                ListsComparer lstObj = new ListsComparer(List1Input.Text, List2Input.Text);
 
-            ResultText.Text = ListsComparer.ListToStr<int>(lstObj.InList1NotInList2(), "; ");
+                ResultText.Text = ListsComparer.ListToStr<int>(lstObj.InList1NotInList2(), "; ");
+            }
+
+            catch (Exception exc)
+            {
+                MessageBsc.ShowError(exc.Message);
+            }
+
         }
     }
 }

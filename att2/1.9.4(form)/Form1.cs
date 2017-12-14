@@ -31,96 +31,41 @@ namespace _1._9._4_form_
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            DataGridView dgv = new DataGridView();
+            // Задаём начальные пути для диалогов открытия/сохранения файла
+            //this.LoadFileDialog.InitialDirectory = Environment.CurrentDirectory;
+            //this.SaveFileDialog.InitialDirectory = Environment.CurrentDirectory;
 
+            //инициализация dataGridView, добавление начальных свойств
+            DataGridViewUtils.InitGridForArr(gridView, 40, false, true, true, true, true);
 
         }
 
         private void InpBtn_Click(object sender, EventArgs e)
         {
-                
-        }
-
-        // Запись данных из массива (одномерного или двухмерного) в DataGridView
-        // (основная реализация, закрытый метод, используется в ArrayToGrid и Array2ToGrid)
-        private static void ArrayToGridInner<T>(DataGridView dgv, Array data)
-        {
-            // выравнивание (если T == int - по правому краю, иначе - по-умолчанию)
-            dgv.DefaultCellStyle.Alignment =
-                typeof(T) == typeof(int) ? DataGridViewContentAlignment.MiddleRight : dgv.DefaultCellStyle.Alignment;
-
-            int rowCount = data.Rank == 1 ? 1 : data.GetLength(0),
-                colCount = data.Rank == 1 ? data.GetLength(0) : data.GetLength(1);
-
-            DataGridViewSelectionMode originalSelectionMode = dgv.SelectionMode;
-            dgv.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            dgv.RowCount = rowCount;
-            dgv.ColumnCount = colCount;
-            dgv.SelectionMode = originalSelectionMode;
-
-            for (int r = 0; r < rowCount; r++)
-                for (int c = 0; c < colCount; c++)
-                    dgv[c, r].Value = data.Rank == 1 ? data.GetValue(c) : data.GetValue(r, c);
-        }
-
-        // Запись данных из списка в DataGridView
-        public static void ListToGrid<T>(DataGridView dgv, IList<T> data)
-        {
-            ArrayToGridInner<T>(dgv, data.ToArray());
-        }
-
-        // Выполняется при чтении данных из файла через меню
-        private void MainMenuFileOpen_Click(object sender, EventArgs ev)
-        {
-            if (LoadFileDialog.ShowDialog() == DialogResult.OK)
+            try
             {
-                try
-                {
-                    // Читаем содержимое выбранного файла и преобразуем его в массив
-                    string arrText = FilesUtils.Read(LoadFileDialog.FileName);
-                    int[,] arr = DataConverter.StrToArray2D<int>(arrText);
+                System.Windows.Forms.OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.InitialDirectory = Environment.CurrentDirectory;
 
-                    // Копируем полученный массив в DataGridView
-                    DataGridViewUtils.Array2ToGrid(inputGridView, arr);
-
-                    MessagesUtils.Show("Данные загружены");
-                }
-                catch (Exception e)
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    MessagesUtils.ShowError("Ошибка загрузки данных");
+                    List<List<double>> data = Inp_OutTXT.InpTXT(openFileDialog.FileName);
+                    List<double> ls = new List<double>(1);
+
+                    if (Inp_OutTXT.IsArr2Square(data))
+                        DataGridViewUtils.ListToGrid<List<double>>(gridView, data);
+                        //DataGridViewUtils.ListToGrid<double>(gridView, ls);
+                    else
+                        MessageBsc.Show("Данные не являются прямоугольным массивом");
                 }
+            }
+
+            catch (Exception exc)
+            {
+                MessageBsc.ShowError(exc.Message);
             }
         }
 
-        // Выполняется при сохранении данных в файл через меню
-        private void MainMenuFileSave_Click(object sender, EventArgs ev)
-        {
-            if (SaveFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                try
-                {
-                    // Преобразуем содержимое DataGridView в массив
-                    int[,] arr = DataGridViewUtils.GridToArray2<int>(outputGridView);
-
-                    // Записываем полученный массив в файл, предварительно
-                    // преобразовав его в строку
-                    FilesUtils.Write(SaveFileDialog.FileName, DataConverter.Array2DToStr<int>(arr));
-
-                    MessagesUtils.Show("Данные сохранены");
-                }
-                catch (Exception e)
-                {
-                    MessagesUtils.ShowError("Ошибка сохранения данных");
-                }
-            }
-        }
-
-        // Выполняется при закрытии приложения через меню
-        private void MainMenuFileClose_Click(object sender, EventArgs e)
-        {
-            // Закрываем форму
-            this.Close();
-        }
 
     }
 }

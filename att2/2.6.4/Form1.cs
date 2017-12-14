@@ -24,29 +24,36 @@ namespace _2._6._4
 
         private void StartBtn_Click(object sender, EventArgs e)
         {
-            double x = double.Parse(this.InputTextX.Text);
-            int n = int.Parse(this.InputTextN.Text);
-            double E = double.Parse(this.InputTextE.Text);
-
-            if ((x > -1) & (x < 1))
+            try
             {
+                double x = double.Parse(this.InputTextX.Text);
+                int n = int.Parse(this.InputTextN.Text);
+                double E = double.Parse(this.InputTextE.Text);
 
-                FunctionCalc calc = new FunctionCalc(x);
+                if ((x > -1) & (x < 1))
+                {
 
-                string result = "Сумма N слагаемых: " + calc.CalcFunctionWith_N_E(n, 0) + Environment.NewLine;
-                result += "Сумма слагаемых, больших заднанного Е: " + calc.CalcFunctionWith_N_E(n, E) + Environment.NewLine;
-                result += "Сумма слагаемых, больших заданного Е/10: " + calc.CalcFunctionWith_N_E(n, E / 10) + Environment.NewLine;
-                result += "Точное значение функции: " + calc.CalcFunction();
+                    FunctionCalc calc = new FunctionCalc(x);
 
-                this.ResultText.Text = result;
+                    string result = "Сумма N слагаемых: " + calc.CalcFunctionWith_N_E(n, 0) + Environment.NewLine;
+                    result += "Сумма слагаемых, больших заднанного Е: " + calc.CalcFunctionWith_N_E(n, E) + Environment.NewLine;
+                    result += "Сумма слагаемых, больших заданного Е/10: " + calc.CalcFunctionWith_N_E(n, E / 10) + Environment.NewLine;
+                    result += "Точное значение функции: " + calc.CalcFunction();
+
+                    this.ResultText.Text = result;
+                }
+                else
+                {
+                    MessageBox.Show("Необходимо ввести значение Х в интервале (-1: 1)!");
+                    InputTextX.Text = "";
+
+                }
             }
-            else
+
+            catch (Exception exc)
             {
-                MessageBox.Show("Необходимо ввести значение Х в интервале (-1: 1)!");
-                InputTextX.Text = "";
-
+                MessageBsc.ShowError(exc.Message);
             }
-
         }
     }
 }

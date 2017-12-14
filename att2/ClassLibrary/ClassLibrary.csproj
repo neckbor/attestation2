@@ -41,9 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataTreatment.cs" />
     <Compile Include="Inp_OutTXT.cs" />
     <Compile Include="ListsComparer.cs" />
     <Compile Include="DataGridViewUtils.cs" />
+    <Compile Include="MessageBsc.cs" />
     <Compile Include="SameItemsCount.cs" />
     <Compile Include="StringModifier.cs" />
     <Compile Include="FunctionCalc.cs" />

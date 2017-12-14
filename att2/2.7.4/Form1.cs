@@ -24,9 +24,17 @@ namespace _2._7._4
 
         private void StartBtn_Click(object sender, EventArgs e)
         {
-            SameItemsCount masObj = new SameItemsCount(InputText.Text);
+            try
+            {
+                SameItemsCount masObj = new SameItemsCount(InputText.Text);
 
-            ResultText.Text = masObj.MaxRepeatCount();
+                ResultText.Text = masObj.MaxRepeatCount();
+            }
+
+            catch (Exception exc)
+            {
+                MessageBsc.ShowError(exc.Message);
+            }
         }
     }
 }

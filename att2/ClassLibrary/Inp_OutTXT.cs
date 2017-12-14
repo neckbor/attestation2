@@ -8,9 +8,9 @@ using System.IO;
 
 namespace ClassLibrary
 {
-    class Inp_OutTXT
+    public class Inp_OutTXT
     {
-        public void InpTXT(string fileWay)
+        public static List<List<double>> InpTXT(string fileWay)
         {
             StreamReader lnReader = new StreamReader(fileWay);
             
@@ -37,6 +37,7 @@ namespace ClassLibrary
 
             //проверка на прямоугольность
             //if (!IsArr2Square(data))
+            return data;
 
         }
 
@@ -54,7 +55,7 @@ namespace ClassLibrary
             );
         }
 
-        private bool IsArr2Square(List<List<double>> data)
+        public static bool IsArr2Square(List<List<double>> data)
         {
             for (int i = 0; i < data.Count(); i++)
                 if (data[i].Count != data.Count)
