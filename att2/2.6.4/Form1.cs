@@ -10,6 +10,9 @@ using System.Windows.Forms;
 using ClassLibrary;
 
 namespace _2._6._4
+    /*Раздел 6 номер 35
+    35. arctg(x) = x - (x^3/3) + (x^5/5) - (x^7/7) + ...   R = 1
+    */
 {
     public partial class Form1 : Form
     {

@@ -10,6 +10,9 @@ using System.Windows.Forms;
 using ClassLibrary;
 
 namespace _1._7._4
+    /* Раздел 7 номер 4
+     4.	Дан массив размера N. Определить произведение нечетных элементов, имеющих четные индексы.
+     */
 {
     public partial class Task1Block7 : Form
     {
