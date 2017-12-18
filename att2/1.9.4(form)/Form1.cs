@@ -26,7 +26,17 @@ namespace _1._9._4_form_
 
         private void StartBtn_Click(object sender, EventArgs e)
         {
+            try
+            {
+                List<List<double>> data = new List<List<double>>(DataGridViewUtils.GridToList<List<double>>(gridView));
 
+                DataGridViewUtils.ListToGrid<List<double>>(gridView, DataTreatment.ColumEject(data));
+            }
+
+            catch (Exception exc)
+            {
+                MessageBsc.ShowError(exc.Message);
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -36,7 +46,7 @@ namespace _1._9._4_form_
             //this.SaveFileDialog.InitialDirectory = Environment.CurrentDirectory;
 
             //инициализация dataGridView, добавление начальных свойств
-            DataGridViewUtils.InitGridForArr(gridView, 40, false, true, true, true, true);
+            DataGridViewUtils.InitGridForArr(gridView, 40, false, false, false, true, true);
 
         }
 
@@ -50,11 +60,13 @@ namespace _1._9._4_form_
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     List<List<double>> data = Inp_OutTXT.InpTXT(openFileDialog.FileName);
-                    List<double> ls = new List<double>(1);
 
                     if (Inp_OutTXT.IsArr2Square(data))
-                        DataGridViewUtils.ListToGrid<List<double>>(gridView, data);
-                        //DataGridViewUtils.ListToGrid<double>(gridView, ls);
+                    {
+                       // for (int i = 0; i < data.Count; i++)
+                           // DataGridViewUtils.ListToGrid<double>(gridView, data[i]);
+                        DataGridViewUtils.ListToGrid<List<double>>(gridView, data); 
+                    }
                     else
                         MessageBsc.Show("Данные не являются прямоугольным массивом");
                 }

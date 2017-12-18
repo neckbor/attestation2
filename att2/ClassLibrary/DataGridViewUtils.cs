@@ -243,5 +243,49 @@ namespace ClassLibrary
             ArrayToGridInner<T>(dgv, data.ToArray());
         }
 
+        // Создание массива (одномерного или array2 - двумерного) из данных в DataGridView
+        // (основная реализация, закрытый метод, используется в GridToArray и GridToArray2)
+        private static Array GridToArrayInner<T>(DataGridView dgv, bool array2 = false)
+        {
+            Array result = array2 ? (Array)new T[dgv.RowCount, dgv.ColumnCount] : (Array)new T[dgv.ColumnCount];
+
+            for (int r = 0; r < (array2 ? dgv.RowCount : 1); r++)
+                for (int c = 0; c < dgv.ColumnCount; c++)
+                {
+                    object value = dgv[c, r].Value;
+                    try
+                    {
+                        value = (T)Convert.ChangeType(value, typeof(T));
+                        if (array2)
+                            result.SetValue(value, r, c);
+                        else
+                            result.SetValue(value, c);
+                    }
+                    catch (Exception except)
+                    {
+                        throw new ApplicationException(
+                            string.Format(
+                                "Невозможно преобразовать в {2} значение \"{0}\" (в ячейке [{1}])",
+                                value, (array2 ? r + ", " : "") + c, typeof(T).Name
+                            ),
+                            except
+                        );
+                    }
+                }
+
+            return result;
+        }
+
+        // Создание одномерного массива из данных в DataGridView
+        public static T[] GridToArray<T>(DataGridView dgv)
+        {
+            return (T[])GridToArrayInner<T>(dgv);
+        }
+
+        // Создание списка из данных в DataGridView
+        public static List<T> GridToList<T>(DataGridView dgv)
+        {
+            return new List<T>(GridToArray<T>(dgv));
+        }
     }
 }

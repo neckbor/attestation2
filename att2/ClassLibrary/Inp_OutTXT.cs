@@ -24,11 +24,11 @@ namespace ClassLibrary
             int i = 0;
 
             
-            while (lnTXT != "")
+            while (lnTXT != null)
             {
                 List<double> line = new List<double>(StrToList<double>(lnTXT));
 
-                data[i] = line;
+                data.Add(line);
 
                 i++;
                 lnTXT = lnReader.ReadLine();
@@ -57,8 +57,9 @@ namespace ClassLibrary
 
         public static bool IsArr2Square(List<List<double>> data)
         {
+            int chk = data[0].Count;
             for (int i = 0; i < data.Count(); i++)
-                if (data[i].Count != data.Count)
+                if (data[i].Count != chk)
                     return false;
 
             return true;
