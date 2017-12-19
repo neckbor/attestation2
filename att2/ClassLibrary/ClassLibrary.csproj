@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataTreatment.cs" />
+    <Compile Include="DataProcessing.cs" />
     <Compile Include="Inp_OutTXT.cs" />
     <Compile Include="ListsComparer.cs" />
     <Compile Include="DataGridViewUtils.cs" />

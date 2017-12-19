@@ -243,6 +243,13 @@ namespace ClassLibrary
             ArrayToGridInner<T>(dgv, data.ToArray());
         }
 
+        // Запись данных из двухмерного массива в DataGridView
+        public static void ArrayToGrid<T>(DataGridView dgv, T[,] data)
+        {
+            ArrayToGridInner<T>(dgv, data);
+        }
+
+
         // Создание массива (одномерного или array2 - двумерного) из данных в DataGridView
         // (основная реализация, закрытый метод, используется в GridToArray и GridToArray2)
         private static Array GridToArrayInner<T>(DataGridView dgv, bool array2 = false)
@@ -286,6 +293,12 @@ namespace ClassLibrary
         public static List<T> GridToList<T>(DataGridView dgv)
         {
             return new List<T>(GridToArray<T>(dgv));
+        }
+
+        // Создание двухмерного массива из данных в DataGridView
+        public static T[,] GridToArray2<T>(DataGridView dgv)
+        {
+            return (T[,])GridToArrayInner<T>(dgv, true);
         }
     }
 }

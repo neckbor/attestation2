@@ -28,9 +28,9 @@ namespace _1._9._4_form_
         {
             try
             {
-                List<List<double>> data = new List<List<double>>(DataGridViewUtils.GridToList<List<double>>(gridView));
+                List<List<double>> data = new List<List<double>>();
 
-                DataGridViewUtils.ListToGrid<List<double>>(gridView, DataTreatment.ColumEject(data));
+                DataGridViewUtils.ArrayToGrid<double>(gridView, DataProcessing.ListToArray(DataProcessing.ColumEject(DataProcessing.ArrayToList(DataGridViewUtils.GridToArray2<double>(gridView)))));
             }
 
             catch (Exception exc)
@@ -65,7 +65,7 @@ namespace _1._9._4_form_
                     {
                        // for (int i = 0; i < data.Count; i++)
                            // DataGridViewUtils.ListToGrid<double>(gridView, data[i]);
-                        DataGridViewUtils.ListToGrid<List<double>>(gridView, data); 
+                        DataGridViewUtils.ArrayToGrid<double>(gridView, DataProcessing.ListToArray(data)); 
                     }
                     else
                         MessageBsc.Show("Данные не являются прямоугольным массивом");
