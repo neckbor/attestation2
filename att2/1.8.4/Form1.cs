@@ -17,6 +17,8 @@ public List<int> InList1NotInList2(List<int> list1, List<int> list2)
 public int IndexOf(IList<int> list, int value)	,
 которую использовать в реализации функции InList1NotInList2.
 */
+
+    //  ЗАДАЧА РЕШЕНА
 {
     public partial class Form1 : Form
     {

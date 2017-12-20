@@ -14,6 +14,8 @@ namespace _1._7._4
      4.	Дан массив размера N. Определить произведение нечетных элементов, имеющих четные индексы.
      */
 {
+    //    ЗАДАЧА РЕШЕНА
+
     public partial class Task1Block7 : Form
     {
         public Task1Block7()
