@@ -15,48 +15,15 @@ namespace _1._9._4_console_
 (Совпадающие столбцы – столбцы, у которых все соответствующие элементы равны друз другу).
 При формировании нового массива оставить только первый из каждого набора совпадающих столбцов.
  */
+        //ЗАДАЧА РЕШЕНА
 
         static void Main(string[] args)
         {
-/*            Console.WriteLine("Команды консоли: \n 1.Считать файл: read \n 2.Исключить одинаковые столбцы: run \n ");
-
-            string comand = Console.ReadLine();
-            while (true)
-            {
-                try
-                {
-                    while (!(comand == "read" || comand == "run"))
-                    {
-                        Console.WriteLine("Команда не распознана(");
-                        comand = Console.ReadLine();
-                    }
-
-                    if (comand == "read")
-                    {
-                            try
-                            {
-                                Inp_Out.Arr2Print_Console<double>(DataProcessing.ListToArray(Inp_Out.InpTXT(Inp_Out.ReadValueFromConsole("имя файла"))));
-
-                                break;
-                            }
-                            catch { };
-                    }
-                    else
-                    {
-
-                    };
-                }
-                catch { };
-
-            }
-            Console.ReadKey();*/
-
-
-            Console.WriteLine("Прочитать данные из файла? (ответ - да/нет)");
+            Console.WriteLine("Прочитать данные из файла? (ответ - yes/no)");
             
             switch (Console.ReadLine())
             {
-                case "да":
+                case "yes":
                     string fileName = Inp_Out.ReadValueFromConsole("имя файла");
 
                     List<List<double>> data = Inp_Out.InpTXT(fileName);
@@ -68,7 +35,7 @@ namespace _1._9._4_console_
                     Inp_Out.Arr2Print_Console<double>(DataProcessing.ListToArray(DataProcessing.ColumEject(data)));
                     break;
 
-                case "нет":
+                case "no":
                     Console.WriteLine("Введите количество строк массива:");
                     int rowCount = int.Parse(Console.ReadLine());
 
