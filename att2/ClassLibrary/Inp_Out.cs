@@ -74,9 +74,21 @@ namespace ClassLibrary
                 try
                 {
                     Console.Write("Введите {0}: ", varName);
-                    return Environment.CurrentDirectory + "\u005C" + StrToValue<string>(Console.ReadLine());
+
+                    String fileName = Console.ReadLine();
+                    fileName = Environment.CurrentDirectory + "\\" + GetDataDirectiry() + fileName;
+
+                    return fileName;
+
+//                    return Environment.CurrentDirectory + "\u005C" + StrToValue<string>(Console.ReadLine());
                 }
                 catch { }  // "маскируем" ошибку (выполнится еще раз тело цикла)
+        }
+
+        // Возвращает путь к папке с файлами данных
+        public static string GetDataDirectiry()
+        {
+            return "\\..\\..\\..\\Data\\";
         }
 
         // Функция ввода массива с консоли в диалогом режиме:

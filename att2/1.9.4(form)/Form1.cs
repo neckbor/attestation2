@@ -49,7 +49,7 @@ namespace _1._9._4_form_
             try
             {
                 System.Windows.Forms.OpenFileDialog openFileDialog = new OpenFileDialog();
-                openFileDialog.InitialDirectory = Environment.CurrentDirectory;
+                openFileDialog.InitialDirectory = Environment.CurrentDirectory + "\\" + Inp_Out.GetDataDirectiry();
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
