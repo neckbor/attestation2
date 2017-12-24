@@ -53,9 +53,9 @@ namespace _1._9._4_form_
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    List<List<double>> data = Inp_OutTXT.InpTXT(openFileDialog.FileName);
+                    List<List<double>> data = Inp_Out.InpTXT(openFileDialog.FileName);
 
-                    if (Inp_OutTXT.IsArr2Square(data))
+                    if (Inp_Out.IsArr2Square(data))
                     {
                         DataGridViewUtils.ArrayToGrid<double>(gridView, DataProcessing.ListToArray(data)); 
                     }
