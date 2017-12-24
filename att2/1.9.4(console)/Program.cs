@@ -35,7 +35,7 @@ namespace _1._9._4_console_
                     {
                             try
                             {
-                                Inp_Out.Arr2Print_Console<double>(DataProcessing.ListToArray(Inp_Out.InpTXT(Inp_Out.ReadValueFromConsole<string>("имя файла"))));
+                                Inp_Out.Arr2Print_Console<double>(DataProcessing.ListToArray(Inp_Out.InpTXT(Inp_Out.ReadValueFromConsole("имя файла"))));
 
                                 break;
                             }
