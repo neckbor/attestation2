@@ -49,7 +49,7 @@ namespace _1._9._4_form_
             try
             {
                 System.Windows.Forms.OpenFileDialog openFileDialog = new OpenFileDialog();
-                openFileDialog.InitialDirectory = Environment.CurrentDirectory + "\\" + Inp_Out.GetDataDirectiry();
+                openFileDialog.InitialDirectory = System.IO.Path.GetFullPath(Environment.CurrentDirectory + Inp_Out.GetDataDirectiry());
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
@@ -62,7 +62,7 @@ namespace _1._9._4_form_
                     else
                         MessageBsc.Show("Данные не являются прямоугольным массивом");
                 }
-            }
+                }
 
             catch (Exception exc)
             {
