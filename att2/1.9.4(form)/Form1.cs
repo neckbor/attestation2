@@ -29,7 +29,7 @@ namespace _1._9._4_form_
         {
             try
             {
-                DataGridViewUtils.ArrayToGrid<double>(gridView, DataProcessing.ListToArray(DataProcessing.ColumEject(DataProcessing.ArrayToList(DataGridViewUtils.GridToArray2<double>(gridView)))));
+                DataGridViewUtils.ArrayToGrid<double>(gridView, DataProcessing.ListToArray(DataProcessing.ColumEject(DataProcessing.Array2ToList2(DataGridViewUtils.GridToArray2<double>(gridView)))));
             }
 
             catch (Exception exc)
@@ -41,7 +41,7 @@ namespace _1._9._4_form_
         private void Form1_Load(object sender, EventArgs e)
         {
             //инициализация dataGridView, добавление начальных свойств
-            DataGridViewUtils.InitGridForArr(gridView, 40, false, false, false, true, true);
+            DataGridViewUtils.InitGridForArr(gridView, 40, false, false, false, false, false);
         }
 
         private void InpBtn_Click(object sender, EventArgs e)

@@ -18,7 +18,7 @@ namespace _1._9._4_console_
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Команды консоли: \n 1.Считать файл: read \n 2.Исключить одинаковые столбцы: run \n ");
+/*            Console.WriteLine("Команды консоли: \n 1.Считать файл: read \n 2.Исключить одинаковые столбцы: run \n ");
 
             string comand = Console.ReadLine();
             while (true)
@@ -49,6 +49,47 @@ namespace _1._9._4_console_
                 catch { };
 
             }
+            Console.ReadKey();*/
+
+
+            Console.WriteLine("Прочитать данные из файла? (ответ - да/нет)");
+            
+            switch (Console.ReadLine())
+            {
+                case "да":
+                    string fileName = Inp_Out.ReadValueFromConsole("имя файла");
+
+                    List<List<double>> data = Inp_Out.InpTXT(fileName);
+
+                    Console.WriteLine("Исходные данные:");
+                    Inp_Out.Arr2Print_Console<double>(DataProcessing.ListToArray(data));
+
+                    Console.WriteLine("Обработанный массив:");
+                    Inp_Out.Arr2Print_Console<double>(DataProcessing.ListToArray(DataProcessing.ColumEject(data)));
+                    break;
+
+                case "нет":
+                    Console.WriteLine("Введите количество строк массива:");
+                    int rowCount = int.Parse(Console.ReadLine());
+
+                    Console.WriteLine("Введите двухмерный массив (через пробел или запятую) по строкам:");
+                    List<List<double>> consData = new List<List<double>>();
+
+                    int i = 0;
+                    while (i <= rowCount)
+                    {
+                        consData.Add(DataProcessing.ArrayToList(Inp_Out.StrToArray<double>(Console.ReadLine())));
+                        i++;
+                    }
+                    Console.WriteLine("Обработанный массив:");
+                    Inp_Out.Arr2Print_Console<double>(DataProcessing.ListToArray(DataProcessing.ColumEject(consData)));
+
+                    break;
+                default:
+                    Console.WriteLine("произошла какая-то ошибка");
+                    break;
+            }
+
             Console.ReadKey();
         }
     }
