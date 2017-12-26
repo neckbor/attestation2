@@ -41,7 +41,7 @@ namespace _1._9._4_form_
         private void Form1_Load(object sender, EventArgs e)
         {
             //инициализация dataGridView, добавление начальных свойств
-            DataGridViewUtils.InitGridForArr(gridView, 40, false, false, false, false, false);
+            DataGridViewUtils.InitGridForArr(gridView, 40, false, false, false, true, true);
         }
 
         private void InpBtn_Click(object sender, EventArgs e)

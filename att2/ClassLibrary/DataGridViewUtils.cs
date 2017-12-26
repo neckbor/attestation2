@@ -206,13 +206,6 @@ namespace ClassLibrary
                     e.Handled = true;
                 }
             };
-
-            // установка минимального кол-ва столбцов и строк
-            // (обязательно после привязки обработчика события добавления столбца)
-            if (dgv.ColumnCount == 0)
-                dgv.ColumnCount = 1;
-            if (dgv.RowCount == 0)
-                dgv.RowCount = 1;
         }
 
         // Запись данных из массива (одномерного или двухмерного) в DataGridView
