@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.gridView = new System.Windows.Forms.DataGridView();
+            this.colX = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colY = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.InputBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
@@ -37,11 +39,24 @@
             // gridView
             // 
             this.gridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colX,
+            this.colY});
             this.gridView.Location = new System.Drawing.Point(15, 39);
-            this.gridView.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gridView.Margin = new System.Windows.Forms.Padding(6);
             this.gridView.Name = "gridView";
             this.gridView.Size = new System.Drawing.Size(440, 277);
             this.gridView.TabIndex = 0;
+            // 
+            // colX
+            // 
+            this.colX.HeaderText = "X";
+            this.colX.Name = "colX";
+            // 
+            // colY
+            // 
+            this.colY.HeaderText = "Y";
+            this.colY.Name = "colY";
             // 
             // label1
             // 
@@ -72,7 +87,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.gridView);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "Form1";
             this.Text = "Раздел 10 номер 4";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -87,6 +102,8 @@
         private System.Windows.Forms.DataGridView gridView;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button InputBtn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colX;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colY;
     }
 }
 

@@ -123,7 +123,7 @@ namespace ProjectTools
             // установить ширину заголовка строк в 65 пикселей
             dgv.RowHeadersWidth = defaultColWidth;
             // установить высоту заголовка столбцов равной высоте строки по умолчанию
-            dgv.ColumnHeadersHeight = dgv.RowTemplate.Height;
+            dgv.ColumnHeadersHeight = 40;
 
             dgv.RowHeadersVisible = showRowsIndexes;
             dgv.ColumnHeadersVisible = showColsIndexes;
@@ -136,13 +136,12 @@ namespace ProjectTools
                 if (showRowsIndexes)
                     for (int r = 0; r < dgv.RowCount; r++)
                         dgv.Rows[r].HeaderCell.Value = string.Format("[ {0} ]", r);
-                if (showColsIndexes)
-                    for (int c = 0; c < dgv.ColumnCount; c++)
-                    {
-                        DataGridViewColumn column = dgv.Columns[c];
-                        column.SortMode = DataGridViewColumnSortMode.NotSortable;
-                        column.HeaderCell.Value = string.Format("[ {0} ]", c);
-                    }
+                //if (showColsIndexes)
+                //    {
+                //        DataGridViewColumn colX = dgv.Columns[0];
+                //        column.SortMode = DataGridViewColumnSortMode.NotSortable;
+                //        colX.HeaderCell.Value = string.Format("[ {0} ]", c);
+                //    }
             };
 
             // привязываем обработчик события добавления столбца, чтобы изменять его размер
@@ -187,25 +186,25 @@ namespace ProjectTools
                     int.TryParse("" + cell.Value, out temp) ? DataGridViewContentAlignment.MiddleRight : DataGridViewContentAlignment.MiddleLeft;
             };
 
-            // привязываем обработчик событий, который нужным образом отрисовывает содержимое ячеек заголовков
-            // (чтобы не рисовались всякие стрелки-звездочки и умещался весь текст)
-            StringFormat sf = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center, };
-            dgv.CellPainting += (sender, e) =>
-            {
-                if (e.ColumnIndex < 0 || e.RowIndex < 0)
-                {
-                    e.PaintBackground(e.CellBounds, false);
-                    if (e.RowIndex >= 0 || e.ColumnIndex >= 0)
-                        e.Graphics.DrawString(
-                            (e.ColumnIndex < 0 ? dgv.Rows[e.RowIndex].HeaderCell.Value : dgv.Columns[e.ColumnIndex].HeaderCell.Value).ToString(),
-                            dgv.RowHeadersDefaultCellStyle.Font,
-                            new SolidBrush(dgv.RowHeadersDefaultCellStyle.ForeColor),
-                            e.CellBounds,
-                            sf
-                        );
-                    e.Handled = true;
-                }
-            };
+            //// привязываем обработчик событий, который нужным образом отрисовывает содержимое ячеек заголовков
+            //// (чтобы не рисовались всякие стрелки-звездочки и умещался весь текст)
+            //StringFormat sf = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center, };
+            //dgv.CellPainting += (sender, e) =>
+            //{
+            //    if (e.ColumnIndex < 0 || e.RowIndex < 0)
+            //    {
+            //        e.PaintBackground(e.CellBounds, false);
+            //        if (e.RowIndex >= 0 || e.ColumnIndex >= 0)
+            //            e.Graphics.DrawString(
+            //                (e.ColumnIndex < 0 ? dgv.Rows[e.RowIndex].HeaderCell.Value : dgv.Columns[e.ColumnIndex].HeaderCell.Value).ToString(),
+            //                dgv.RowHeadersDefaultCellStyle.Font,
+            //                new SolidBrush(dgv.RowHeadersDefaultCellStyle.ForeColor),
+            //                e.CellBounds,
+            //                sf
+            //            );
+            //        e.Handled = true;
+            //    }
+            //};
         }
 
         // Запись данных из массива (одномерного или двухмерного) в DataGridView
