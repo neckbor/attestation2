@@ -44,7 +44,9 @@
     <Compile Include="DataGridViewUtils.cs" />
     <Compile Include="DataProcessing.cs" />
     <Compile Include="Inp-Out.cs" />
+    <Compile Include="BiggestTriangle.cs" />
     <Compile Include="MessageBsc.cs" />
+    <Compile Include="Points.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

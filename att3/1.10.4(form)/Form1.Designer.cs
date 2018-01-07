@@ -33,6 +33,7 @@
             this.colY = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.InputBtn = new System.Windows.Forms.Button();
+            this.runBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -78,11 +79,22 @@
             this.InputBtn.UseVisualStyleBackColor = true;
             this.InputBtn.Click += new System.EventHandler(this.InputBtn_Click);
             // 
+            // runBtn
+            // 
+            this.runBtn.Location = new System.Drawing.Point(313, 326);
+            this.runBtn.Name = "runBtn";
+            this.runBtn.Size = new System.Drawing.Size(136, 56);
+            this.runBtn.TabIndex = 3;
+            this.runBtn.Text = "Подобрать точки";
+            this.runBtn.UseVisualStyleBackColor = true;
+            this.runBtn.Click += new System.EventHandler(this.runBtn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(471, 476);
+            this.Controls.Add(this.runBtn);
             this.Controls.Add(this.InputBtn);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.gridView);
@@ -104,6 +116,7 @@
         private System.Windows.Forms.Button InputBtn;
         private System.Windows.Forms.DataGridViewTextBoxColumn colX;
         private System.Windows.Forms.DataGridViewTextBoxColumn colY;
+        private System.Windows.Forms.Button runBtn;
     }
 }
 
