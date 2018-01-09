@@ -37,7 +37,7 @@ namespace ProjectTools
             return false;
         }
 
-        public static string Display_form(Points p1, Points p2, Points p3)
+        public static string Display(Points p1, Points p2, Points p3)
         {
             return p1._ind.ToString() + ", " + p2._ind.ToString() + ", " + p3._ind.ToString();
         }
@@ -45,6 +45,11 @@ namespace ProjectTools
         public static double Vector(Points p1, Points p2)
         {
             return Math.Sqrt(Math.Pow(p1._X - p2._X, 2) + Math.Pow(p1._Y - p2._Y, 2));
+        }
+
+        public static void Display_console(Points p1, Points p2, Points p3)
+        {
+            Console.WriteLine("Самый треугольник получается из точек: {0}, {1}, {2}", p1._ind, p2._ind, p3._ind);
         }
     }
 }

@@ -34,7 +34,7 @@ namespace ProjectTools
                     for (int p3 = 0; p3 < points.Length; p3++)
                         if (p1 != p2 && p1 != p3 && p2 != p3)
                             if (Square(points[p1], points[p2], points[p3]) > maxS)
-                                result = Points.Display_form(points[p1], points[p2], points[p3]);
+                                result = Points.Display(points[p1], points[p2], points[p3]);
             return result;     
         }
         //нахождение площади

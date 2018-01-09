@@ -53,7 +53,7 @@ namespace _1._9._4_console_
 
                     break;
                 default:
-                    Console.WriteLine("произошла какая-то ошибка");
+                    Console.WriteLine("команда не распoзнана");
                     break;
             }
 
