@@ -34,7 +34,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.InputBtn = new System.Windows.Forms.Button();
             this.runBtn = new System.Windows.Forms.Button();
-            this.outputLbl = new System.Windows.Forms.Label();
+            this.OutputLbl = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -90,20 +90,20 @@
             this.runBtn.UseVisualStyleBackColor = true;
             this.runBtn.Click += new System.EventHandler(this.runBtn_Click);
             // 
-            // outputLbl
+            // OutputLbl
             // 
-            this.outputLbl.AutoSize = true;
-            this.outputLbl.Location = new System.Drawing.Point(15, 389);
-            this.outputLbl.Name = "outputLbl";
-            this.outputLbl.Size = new System.Drawing.Size(0, 24);
-            this.outputLbl.TabIndex = 4;
+            this.OutputLbl.AutoSize = true;
+            this.OutputLbl.Location = new System.Drawing.Point(15, 389);
+            this.OutputLbl.Name = "OutputLbl";
+            this.OutputLbl.Size = new System.Drawing.Size(0, 24);
+            this.OutputLbl.TabIndex = 4;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(471, 476);
-            this.Controls.Add(this.outputLbl);
+            this.Controls.Add(this.OutputLbl);
             this.Controls.Add(this.runBtn);
             this.Controls.Add(this.InputBtn);
             this.Controls.Add(this.label1);
@@ -127,7 +127,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colX;
         private System.Windows.Forms.DataGridViewTextBoxColumn colY;
         private System.Windows.Forms.Button runBtn;
-        private System.Windows.Forms.Label outputLbl;
+        private System.Windows.Forms.Label OutputLbl;
     }
 }
 

@@ -42,6 +42,8 @@ namespace _1._10._4_form_
         {
             try
             {
+                OutputLbl.Text = "";
+
                 System.Windows.Forms.OpenFileDialog openFileDialog = new OpenFileDialog();
                 openFileDialog.InitialDirectory = System.IO.Path.GetFullPath(Environment.CurrentDirectory + Inp_Out.GetDataDirectiry());
 
@@ -64,6 +66,7 @@ namespace _1._10._4_form_
         {
             try
             {
+                OutputLbl.Text = "";
                //данные из грида
                 double[,] data = DataGridViewUtils.GridToArray2<double>(gridView);
                 
@@ -71,13 +74,13 @@ namespace _1._10._4_form_
                 Points[] points = new Points[data.GetLength(0)];
                 for (int r = 0; r < data.GetLength(0); r++)
                 {
-                    Points pnt = new Points(data[r, 0], data[r, 1], r);
+                    Points pnt = new Points(data[r, 0], data[r, 1], r + 1);
                     points[r] = pnt;
                 }
 
                 if (BiggestTriangle.IsTrianglePossible(points))
                 {
-
+                    OutputLbl.Text = "Самый треугольник получается из точек: " + BiggestTriangle.MaxTriangleSquare(points);
                 }
                 else
                     MessageBsc.ShowError("Из таких точек невозможно построить треугольник");

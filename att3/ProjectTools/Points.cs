@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ProjectTools
 {
@@ -33,9 +37,14 @@ namespace ProjectTools
             return false;
         }
 
-        public static void Display_form(Points p1, Points p2, Points p3)
+        public static string Display_form(Points p1, Points p2, Points p3)
         {
+            return p1._ind.ToString() + ", " + p2._ind.ToString() + ", " + p3._ind.ToString();
+        }
 
+        public static double Vector(Points p1, Points p2)
+        {
+            return Math.Sqrt(Math.Pow(p1._X - p2._X, 2) + Math.Pow(p1._Y - p2._Y, 2));
         }
     }
 }

@@ -22,18 +22,30 @@ namespace ProjectTools
 
             return false;
         }
-        public static void MaxTriangleSquare(Points[] points)
+        //перебор точек и прверка на самую большую площадь
+        public static string MaxTriangleSquare(Points[] points)
         {
+            double maxS = 0;
+            string result = "";
+
+            //циклов так много чтобы прям все варианты сочетания точек перебрать (при этом ещё точки в разном порядке получаются(шоб уж наверняка))
             for (int p1 = 0; p1 < points.Length; p1++)
                 for (int p2 = 0; p2 < points.Length; p2++)
                     for (int p3 = 0; p3 < points.Length; p3++)
                         if (p1 != p2 && p1 != p3 && p2 != p3)
-
+                            if (Square(points[p1], points[p2], points[p3]) > maxS)
+                                result = Points.Display_form(points[p1], points[p2], points[p3]);
+            return result;     
         }
-
+        //нахождение площади
         private static double Square(Points p1, Points p2, Points p3)
         {
-            
+            double a = Points.Vector(p1, p2),
+                   b = Points.Vector(p2, p3),
+                   c = Points.Vector(p1, p3),
+                   p = (a + b + c) / 2;
+
+            return Math.Sqrt(p * (p - a) * (p - b) * (p - c));
         }
 
 
