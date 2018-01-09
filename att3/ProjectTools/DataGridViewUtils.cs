@@ -135,7 +135,7 @@ namespace ProjectTools
             {
                 if (showRowsIndexes)
                     for (int r = 0; r < dgv.RowCount; r++)
-                        dgv.Rows[r].HeaderCell.Value = string.Format("[ {0} ]", r);
+                        dgv.Rows[r].HeaderCell.Value = string.Format("{0}", r);
                 //if (showColsIndexes)
                 //    {
                 //        DataGridViewColumn colX = dgv.Columns[0];

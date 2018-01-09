@@ -35,8 +35,10 @@ namespace _1._10._4_console_
                         Points pnt = new Points(data[r, 0], data[r, 1], r + 1);
                         points[r] = pnt;
                     }
-
-                    Console.WriteLine("Самый треугольник получается из точек: " + BiggestTriangle.MaxTriangleSquare(points));
+                    if (BiggestTriangle.IsTrianglePossible(points))
+                        Console.WriteLine("Самый треугольник получается из точек: " + BiggestTriangle.MaxTriangleSquare(points));
+                    else
+                        Console.WriteLine("из таких точек невозможно построить треугольник");
                     break;
 
                 case "no":
@@ -57,9 +59,11 @@ namespace _1._10._4_console_
                         pointsConsole[i] = pnt;
                         i++;
                     }
-
+                    if (BiggestTriangle.IsTrianglePossible(pointsConsole))
                         Console.WriteLine("Самый треугольник получается из точек: " + BiggestTriangle.MaxTriangleSquare(pointsConsole));
-                        break;
+                    else
+                        Console.WriteLine("из таких точек невозможно построить треугольник");
+                    break;
 
                 default:
                         Console.WriteLine("команда не распoзнана");

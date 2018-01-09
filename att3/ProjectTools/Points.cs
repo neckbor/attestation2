@@ -39,7 +39,7 @@ namespace ProjectTools
 
         public static string Display(Points p1, Points p2, Points p3)
         {
-            return p1._ind.ToString() + ", " + p2._ind.ToString() + ", " + p3._ind.ToString();
+            return Environment.NewLine + "(" + p1._X.ToString() + ";" + p1._Y.ToString() + "), " + "(" + p2._X.ToString() + ";" + p2._Y.ToString() + "), " + "(" + p3._X.ToString() + ";" + p3._Y.ToString() + ")";
         }
 
         public static double Vector(Points p1, Points p2)
@@ -49,7 +49,7 @@ namespace ProjectTools
 
         public static void Display_console(Points p1, Points p2, Points p3)
         {
-            Console.WriteLine("Самый треугольник получается из точек: {0}, {1}, {2}", p1._ind, p2._ind, p3._ind);
+            Console.WriteLine("Самый треугольник получается из точек: /n ({0};{1}), ({2};{3}), ({4};{5})", p1._X, p1._Y, p2._X, p2._Y, p3._X, p3._Y);
         }
     }
 }
