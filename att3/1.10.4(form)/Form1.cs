@@ -71,11 +71,16 @@ namespace _1._10._4_form_
                 Points[] points = new Points[data.GetLength(0)];
                 for (int r = 0; r < data.GetLength(0); r++)
                 {
-                    Points pnt = new Points(data[r, 0], data[r, 1]);
+                    Points pnt = new Points(data[r, 0], data[r, 1], r);
                     points[r] = pnt;
                 }
 
+                if (BiggestTriangle.IsTrianglePossible(points))
+                {
 
+                }
+                else
+                    MessageBsc.ShowError("Из таких точек невозможно построить треугольник");
             }
 
             catch (Exception exc)

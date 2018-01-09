@@ -10,27 +10,32 @@ namespace ProjectTools
     {
         private double _X;
         private double _Y;
+        private double _ind; 
 
-        public Points(double x, double y)
+        public Points(double x, double y, int ind)
         {
             _X = x;
             _Y = y;
+            _ind = ind;
         }
 
-        public static bool IsPointOnSameLine(Points[] points)
+        public static bool IsPointOnSameLine(Points p1, Points p2,Points p3)
         {
             double a,
                    b;
 
-            for (int i = 0; i < points.Length - 2; i++)
-            {
-                a = (points[i + 1]._Y - points[i]._Y) / (points[i + 1]._X - points[i]._X);
-                b = points[i]._Y - a * points[i]._X;
+            a = (p2._Y - p1._Y) / (p2._X - p1._X);
+            b = p1._Y - a * p1._X;
 
-                if (points[i + 2]._Y == a * points[i + 2]._X + b)
-                    return true;
-            }
+            if (p3._Y == a * p3._X + b)
+                 return true;
+
             return false;
+        }
+
+        public static void Display_form(Points p1, Points p2, Points p3)
+        {
+
         }
     }
 }
