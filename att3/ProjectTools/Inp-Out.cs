@@ -22,6 +22,11 @@ namespace ProjectTools
             while (lnTXT != null)
             {
                 List<double> line = new List<double>(StrToArray<double>(lnTXT));
+                if (line.Count > 2)
+                {
+                    MessageBsc.ShowError("В исходной таблице должно быть не более двух колонок");
+                    break;
+                }
 
                 data.Add(line);
 
