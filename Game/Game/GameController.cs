@@ -16,6 +16,8 @@ namespace Game
         {
             _model = model;
             _view = form;
+
+            _model.Fill();
         }
 
         public Form1 GetMainForm()

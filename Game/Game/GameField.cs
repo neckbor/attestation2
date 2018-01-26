@@ -21,9 +21,9 @@ namespace Game
         public static int rowCount = 15;
         public static int colCount = 25;
 
-        public static CellColor[,] field = new CellColor[rowCount, colCount];
+        private CellColor[,] _field = new CellColor[rowCount, colCount];
 
-        public static void Fiil()
+        public void Fill()
         {
             Random rnd = new Random();
             int i;
@@ -35,20 +35,20 @@ namespace Game
                         i = rnd.Next(4);
 
                         if (i == 0)
-                            field[r, c] = CellColor.BLUE;
+                            _field[r, c] = CellColor.BLUE;
                         if (i == 1)
-                            field[r, c] = CellColor.GREEN;
+                            _field[r, c] = CellColor.GREEN;
                         if (i == 2)
-                            field[r, c] = CellColor.YELLOW;
+                            _field[r, c] = CellColor.YELLOW;
                         if (i == 3)
-                            field[r, c] = CellColor.RED;
+                            _field[r, c] = CellColor.RED;
                     }
                     else
-                        field[r, c] = CellColor.GRAY;
+                        _field[r, c] = CellColor.GRAY;
                 }
         }
 
-        public static void AddLine()
+        public void AddLine()
         {
             ShiftDown();
 
@@ -60,21 +60,21 @@ namespace Game
                 i = rnd.Next(4);
 
                 if (i == 0)
-                    field[0, c] = CellColor.BLUE;
+                    _field[0, c] = CellColor.BLUE;
                 if (i == 1)
-                    field[0, c] = CellColor.GREEN;
+                    _field[0, c] = CellColor.GREEN;
                 if (i == 2)
-                    field[0, c] = CellColor.YELLOW;
+                    _field[0, c] = CellColor.YELLOW;
                 if (i == 3)
-                    field[0, c] = CellColor.RED;
+                    _field[0, c] = CellColor.RED;
             }
         }
 
-        private static void ShiftDown()
+        private void ShiftDown()
         {
             for (int r = rowCount - 1; r > 0; r--)
                 for (int c = colCount; c > 0; c--)
-                    field[r + 1, c] = field[r, c];
+                    _field[r + 1, c] = _field[r, c];
         }
 
         //public static void Refresh(DataGridView gameFieldGrid)

@@ -32,36 +32,36 @@ namespace Game
             gameFieldGrid.AllowUserToResizeRows = false;
 
 
-            GameField.Fiil();
+         
 
         }
 
         private void gameFieldGrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            GameField.AddLine();
+          
         }
 
-        public void Refresh()
+        public void FieldRefresh()
         {
-            for (int r = 0; r < GameField.rowCount; r++)
-                for (int c = 0; c < GameField.colCount; c++)
-                {
-                    DataGridViewColumn col = gameFieldGrid.Columns[c];
-                    col.Width = 16;
-                    DataGridViewRow row = gameFieldGrid.Rows[r];
-                    row.Height = 16;
+            //for (int r = 0; r < GameField.rowCount; r++)
+            //    for (int c = 0; c < GameField.colCount; c++)
+            //    {
+            //        DataGridViewColumn col = gameFieldGrid.Columns[c];
+            //        col.Width = 16;
+            //        DataGridViewRow row = gameFieldGrid.Rows[r];
+            //        row.Height = 16;
 
-                    if (GameField.field[r, c] == GameField.CellColor.BLUE)
-                        gameFieldGrid[c, r].Style.BackColor = Color.MidnightBlue;
-                    if (GameField.field[r, c] == GameField.CellColor.GREEN)
-                        gameFieldGrid[c, r].Style.BackColor = Color.ForestGreen;
-                    if (GameField.field[r, c] == GameField.CellColor.YELLOW)
-                        gameFieldGrid[c, r].Style.BackColor = Color.Gold;
-                    if (GameField.field[r, c] == GameField.CellColor.RED)
-                        gameFieldGrid[c, r].Style.BackColor = Color.Crimson;
-                    if (GameField.field[r, c] == GameField.CellColor.GRAY)
-                        gameFieldGrid[c, r].Style.BackColor = Color.Gray;
-                }
+            //        if (GameField.field[r, c] == GameField.CellColor.BLUE)
+            //            gameFieldGrid[c, r].Style.BackColor = Color.MidnightBlue;
+            //        if (GameField.field[r, c] == GameField.CellColor.GREEN)
+            //            gameFieldGrid[c, r].Style.BackColor = Color.ForestGreen;
+            //        if (GameField.field[r, c] == GameField.CellColor.YELLOW)
+            //            gameFieldGrid[c, r].Style.BackColor = Color.Gold;
+            //        if (GameField.field[r, c] == GameField.CellColor.RED)
+            //            gameFieldGrid[c, r].Style.BackColor = Color.Crimson;
+            //        if (GameField.field[r, c] == GameField.CellColor.GRAY)
+            //            gameFieldGrid[c, r].Style.BackColor = Color.Gray;
+            //    }
         }
     }
 }
