@@ -12,16 +12,19 @@ namespace Game
 {
     public partial class Form1 : Form
     {
-        public Form1()
+        GameController _controller;
+
+        public Form1(GameController controller)
         {
             InitializeComponent();
+
+            _controller = controller;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //DataGridViewUtils.InitGridForArr(gameFieldGrid, 25, false, false, false, false, false);
-            gameFieldGrid.RowCount = GameField.rowCount;
-            gameFieldGrid.ColumnCount = GameField.colCount;
+            gameFieldGrid.RowCount = _controller.GetColCount();
+            gameFieldGrid.ColumnCount = _controller.GetColCount();
             gameFieldGrid.ReadOnly = true;
             gameFieldGrid.ScrollBars = ScrollBars.None;
             gameFieldGrid.ColumnHeadersVisible = false;
@@ -31,37 +34,36 @@ namespace Game
             gameFieldGrid.AllowUserToResizeColumns = false;
             gameFieldGrid.AllowUserToResizeRows = false;
 
-
-         
-
+            FieldRefresh();
         }
 
         private void gameFieldGrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-          
+            _controller.AddLine();
         }
 
         public void FieldRefresh()
         {
-            //for (int r = 0; r < GameField.rowCount; r++)
-            //    for (int c = 0; c < GameField.colCount; c++)
-            //    {
-            //        DataGridViewColumn col = gameFieldGrid.Columns[c];
-            //        col.Width = 16;
-            //        DataGridViewRow row = gameFieldGrid.Rows[r];
-            //        row.Height = 16;
+            GameField.CellColor[,] field = _controller.GetField();
+            for (int r = 0; r < _controller.GetRowCount(); r++)
+                for (int c = 0; c < _controller.GetColCount(); c++)
+                {
+                    DataGridViewColumn col = gameFieldGrid.Columns[c];
+                    col.Width = 16;
+                    DataGridViewRow row = gameFieldGrid.Rows[r];
+                    row.Height = 16;
 
-            //        if (GameField.field[r, c] == GameField.CellColor.BLUE)
-            //            gameFieldGrid[c, r].Style.BackColor = Color.MidnightBlue;
-            //        if (GameField.field[r, c] == GameField.CellColor.GREEN)
-            //            gameFieldGrid[c, r].Style.BackColor = Color.ForestGreen;
-            //        if (GameField.field[r, c] == GameField.CellColor.YELLOW)
-            //            gameFieldGrid[c, r].Style.BackColor = Color.Gold;
-            //        if (GameField.field[r, c] == GameField.CellColor.RED)
-            //            gameFieldGrid[c, r].Style.BackColor = Color.Crimson;
-            //        if (GameField.field[r, c] == GameField.CellColor.GRAY)
-            //            gameFieldGrid[c, r].Style.BackColor = Color.Gray;
-            //    }
+                    if (field[r, c] == GameField.CellColor.BLUE)
+                        gameFieldGrid[c, r].Style.BackColor = Color.MidnightBlue;
+                    if (field[r, c] == GameField.CellColor.GREEN)
+                        gameFieldGrid[c, r].Style.BackColor = Color.ForestGreen;
+                    if (field[r, c] == GameField.CellColor.YELLOW)
+                        gameFieldGrid[c, r].Style.BackColor = Color.Gold;
+                    if (field[r, c] == GameField.CellColor.RED)
+                        gameFieldGrid[c, r].Style.BackColor = Color.Crimson;
+                    if (field[r, c] == GameField.CellColor.GRAY)
+                        gameFieldGrid[c, r].Style.BackColor = Color.Gray;
+                }
         }
     }
 }

@@ -17,7 +17,11 @@ namespace Game
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            GameController controller = new GameController(new GameField(), new Form1());
+            GameController controller = new GameController();
+            GameField model = new GameField(controller);
+            Form1 view = new Form1(controller);
+
+            controller.Init(model, view);
 
             Application.Run(controller.GetMainForm());
         }

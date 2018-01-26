@@ -12,7 +12,10 @@ namespace Game
         GameField _model;
         Form1 _view;
 
-        public GameController(GameField model, Form1 form)
+        public GameController()
+        {}
+
+        public void Init(GameField model, Form1 form)
         {
             _model = model;
             _view = form;
@@ -23,6 +26,28 @@ namespace Game
         public Form1 GetMainForm()
         {
             return _view;
+        }
+
+        public int GetRowCount()
+        {
+            return _model.RowCount;
+        }
+
+        public int GetColCount()
+        {
+            return _model.ColCount;
+        }
+
+        public GameField.CellColor[,] GetField()
+        {
+            return _model.GetField();
+        }
+
+        public void AddLine()
+        {
+            _model.AddLine();
+
+            _view.FieldRefresh();
         }
     }
 }

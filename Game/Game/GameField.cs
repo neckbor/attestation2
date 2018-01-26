@@ -18,17 +18,29 @@ namespace Game
             GRAY
         }
 
-        public static int rowCount = 15;
-        public static int colCount = 25;
+        public int RowCount { set; get; }
+        public int ColCount { set; get; }
 
-        private CellColor[,] _field = new CellColor[rowCount, colCount];
+        private CellColor[,] _field;
+
+        private GameController _controller;
+
+        public GameField(GameController controller)
+        {
+            _controller = controller;
+
+            RowCount = 15;
+            ColCount = 25;
+
+            _field = new CellColor[RowCount, ColCount];
+        }
 
         public void Fill()
         {
             Random rnd = new Random();
             int i;
-            for (int r = 0; r < rowCount; r++)
-                for (int c = 0; c < colCount; c++)
+            for (int r = 0; r < RowCount; r++)
+                for (int c = 0; c < ColCount; c++)
                 {
                     if (r < 8)
                     {
@@ -55,7 +67,7 @@ namespace Game
             Random rnd = new Random();
             int i;
 
-            for (int c = 0; c < colCount; c++)
+            for (int c = 0; c < ColCount; c++)
             {
                 i = rnd.Next(4);
 
@@ -72,32 +84,14 @@ namespace Game
 
         private void ShiftDown()
         {
-            for (int r = rowCount - 1; r > 0; r--)
-                for (int c = colCount; c > 0; c--)
-                    _field[r + 1, c] = _field[r, c];
+            for (int r = RowCount - 2; r >= 0; r--)
+                for (int c = ColCount - 1; c >= 0; c--)
+                    _field[r + 1, c] = _field[r, c];                
         }
 
-        //public static void Refresh(DataGridView gameFieldGrid)
-        //{
-        //    for (int r = 0; r < rowCount; r++)
-        //        for (int c = 0; c < colCount; c++)
-        //        {
-        //            DataGridViewColumn col = gameFieldGrid.Columns[c];
-        //            col.Width = 16;
-        //            DataGridViewRow row = gameFieldGrid.Rows[r];
-        //            row.Height = 16;
-
-        //            if (field[r, c] == CellColor.BLUE)
-        //                gameFieldGrid[c, r].Style.BackColor = Color.MidnightBlue;
-        //            if (field[r, c] == CellColor.GREEN)
-        //                gameFieldGrid[c, r].Style.BackColor = Color.ForestGreen;
-        //            if (field[r, c] == CellColor.YELLOW)
-        //                gameFieldGrid[c, r].Style.BackColor = Color.Gold;
-        //            if (field[r, c] == CellColor.RED)
-        //                gameFieldGrid[c, r].Style.BackColor = Color.Crimson;
-        //            if (field[r, c] == CellColor.GRAY)
-        //                gameFieldGrid[c, r].Style.BackColor = Color.Gray;
-        //        }
-        //}
+        public CellColor[,] GetField()
+        {
+            return _field;
+        }
     }
 }
