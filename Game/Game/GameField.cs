@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
 
-namespace GameUtils
+namespace Game
 {
     public class GameField
     {
@@ -68,8 +68,6 @@ namespace GameUtils
                 if (i == 3)
                     field[0, c] = CellColor.RED;
             }
-
-            Application.OpenForms
         }
 
         private static void ShiftDown()
