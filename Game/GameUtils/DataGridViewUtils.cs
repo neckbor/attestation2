@@ -227,8 +227,8 @@ namespace GameUtils
             for (int r = 0; r < rowCount; r++)
                 for (int c = 0; c < colCount; c++)
                     //dgv[c, r].Value = data.Rank == 1 ? data.GetValue(c) : data.GetValue(r, c);
-                    if (data[r, c] == Game.CellColor.BLUE)
-
+            //        if (data[r, c] == Game.CellColor.BLUE)
+                    { }
         }
 
         // Запись данных из списка в DataGridView
