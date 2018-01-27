@@ -129,5 +129,25 @@ namespace Game
                 i++;
             }
         }
+
+        public void BlockInput(int colInd)
+        {
+            for (int r = 0; r < RowCount; r++)
+                for (int c = 0; c < ColCount; c++)
+                    if (_stateField[r, c] == CellState.SELECTED)
+                        for (int rowInd = RowCount - 2; rowInd > 0; rowInd--)
+                            if (_field[rowInd - 1, colInd] != CellColor.GRAY)
+                            {
+                                _field[rowInd, colInd] = _field[r, c];
+                                _field[r, c] = CellColor.GRAY;
+                                _stateField[r, c] = CellState.REST;
+                                break;
+                            }           
+        }
+
+        private void BlockDelete()
+        {
+ 
+        }
     }
 }

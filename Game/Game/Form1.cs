@@ -14,6 +14,8 @@ namespace Game
     {
         GameController _controller;
 
+        private int _clickCount = 0;
+
         public Form1(GameController controller)
         {
             InitializeComponent();
@@ -42,7 +44,17 @@ namespace Game
 
         private void gameFieldGrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            _controller.GetCellIndexes(e.ColumnIndex);
+            _clickCount++;
+            if (_clickCount % 2 == 1)
+            {
+                _controller.GetSelectedCellIndex(e.ColumnIndex);
+                //_clickCount++;
+            }
+            else 
+            {
+                _controller.GetInputColumnIndex(e.ColumnIndex);
+                //_clickCount++;
+            }
         }
 
         public void FieldRefresh()
@@ -97,6 +109,7 @@ namespace Game
                     if (field[r, c] == GameField.CellColor.GRAY )
                     {
                         gameFieldGrid[c, r].Style.BackColor = Color.Gray;
+                        gameFieldGrid[c, r].Value = null;
                     }
                 }
         }

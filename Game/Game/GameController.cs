@@ -55,9 +55,15 @@ namespace Game
             _view.FieldRefresh();
         }
 
-        public void GetCellIndexes (int c)
+        public void GetSelectedCellIndex (int c)
         {
             _model.SelectSameColor(c);
+            _view.FieldRefresh();
+        }
+
+        public void GetInputColumnIndex(int c)
+        {
+            _model.BlockInput(c);
             _view.FieldRefresh();
         }
     }
