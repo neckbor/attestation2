@@ -15,7 +15,8 @@ namespace Game
             GREEN,
             YELLOW,
             RED,
-            GRAY
+            GRAY,
+            SELECTED
         }
 
         public int RowCount { set; get; }
@@ -92,6 +93,20 @@ namespace Game
         public CellColor[,] GetField()
         {
             return _field;
+        }
+
+        public void SelectSameColor(int r, int c)
+        {
+            int i = 0;
+            CellColor color = _field[r, c];
+            //for (int r = RowCount - 1; r <= 0; r --)
+            while (color == _field[r - i, c])
+            {
+               // _field[r - i, c] = CellColor.SELECTED;
+                _field[RowCount - i - 1, c] = _field[r - i, c];
+                _field[r - i, c] = CellColor.GRAY;
+                i++;
+            }
         }
     }
 }

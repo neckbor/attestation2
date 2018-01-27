@@ -39,7 +39,7 @@ namespace Game
 
         private void gameFieldGrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            _controller.AddLine();
+            _controller.GetCellIndexes(e.RowIndex, e.ColumnIndex);
         }
 
         public void FieldRefresh()
@@ -63,6 +63,8 @@ namespace Game
                         gameFieldGrid[c, r].Style.BackColor = Color.Crimson;
                     if (field[r, c] == GameField.CellColor.GRAY)
                         gameFieldGrid[c, r].Style.BackColor = Color.Gray;
+                    if (field[r, c] == GameField.CellColor.SELECTED)
+                    { }
                 }
         }
     }

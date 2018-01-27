@@ -49,5 +49,11 @@ namespace Game
 
             _view.FieldRefresh();
         }
+
+        public void GetCellIndexes (int r, int c)
+        {
+            _model.SelectSameColor(r, c);
+            _view.FieldRefresh();
+        }
     }
 }
