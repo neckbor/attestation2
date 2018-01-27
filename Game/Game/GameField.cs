@@ -25,6 +25,7 @@ namespace Game
 
         public int RowCount { set; get; }
         public int ColCount { set; get; }
+        public int NearSameCells = 0;
 
         private CellColor[,] _field;
         private CellState[,] _stateField;
@@ -143,14 +144,17 @@ namespace Game
                                 _stateField[r, c] = CellState.REST;
                                 BlockDelete(rowInd, colInd);
                                 break;
-                            }           
+                            }
+            ShiftAfterDeleting();
         }
 
         private void BlockDelete(int rowInd, int colInd)
         {
             if (rowInd > 0 && _field[rowInd - 1, colInd] == _field[rowInd, colInd])//север
             {
-                _field[rowInd, colInd] = CellColor.GRAY;
+                if (NearSameCells >= 4)
+                    _field[rowInd, colInd] = CellColor.GRAY;
+                NearSameCells++;
                 BlockDelete(rowInd - 1, colInd);
             }
             //if (colInd < ColCount - 1 && _field[rowInd - 1, colInd + 1] == _field[rowInd, colInd])//северо-восток
@@ -161,7 +165,9 @@ namespace Game
 
             if (colInd < ColCount - 1 && _field[rowInd, colInd + 1] == _field[rowInd, colInd])//восток
             {
-                _field[rowInd, colInd] = CellColor.GRAY;
+                if (NearSameCells >= 4)
+                    _field[rowInd, colInd] = CellColor.GRAY;
+                NearSameCells++;
                 BlockDelete(rowInd, colInd + 1);
             }
             //if (rowInd < RowCount - 1 && colInd < ColCount - 1 && _field[rowInd + 1, colInd + 1] == _field[rowInd, colInd])//юго-восток
@@ -172,14 +178,29 @@ namespace Game
 
             if (rowInd < RowCount - 1 && _field[rowInd + 1, colInd] == _field[rowInd, colInd])//юг
             {
-                _field[rowInd, colInd] = CellColor.GRAY;
+                if (NearSameCells >= 4)
+                    _field[rowInd, colInd] = CellColor.GRAY;
+                NearSameCells++;
                 BlockDelete(rowInd + 1, colInd);
             }
             if (colInd > 0 && _field[rowInd, colInd - 1] == _field[rowInd, colInd])//запад
             {
-                _field[rowInd, colInd] = CellColor.GRAY;
+                if (NearSameCells >= 4)
+                    _field[rowInd, colInd] = CellColor.GRAY;
+                NearSameCells++;
                 BlockDelete(rowInd, colInd - 1);
             }
+        }
+
+        private void ShiftAfterDeleting()
+        {
+            for (int r = RowCount - 1; r > 1; r--)
+                for (int c = 0; c < ColCount; c++)
+                    if (_field[r - 1, c] == CellColor.GRAY)
+                    {
+                        _field[r, c] = _field[r - 1, c];
+                        _field[r, c] = CellColor.GRAY;
+                    }
         }
 
 
