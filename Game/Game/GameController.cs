@@ -43,6 +43,11 @@ namespace Game
             return _model.GetField();
         }
 
+        public GameField.CellState[,] GetStateField()
+        {
+            return _model.GetStateField();
+        }
+
         public void AddLine()
         {
             _model.AddLine();

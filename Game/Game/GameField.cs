@@ -15,14 +15,19 @@ namespace Game
             GREEN,
             YELLOW,
             RED,
-            GRAY,
-            SELECTED
+            GRAY
         }
+
+        public enum CellState {
+            SELECTED,
+            REST
+        }   
 
         public int RowCount { set; get; }
         public int ColCount { set; get; }
 
         private CellColor[,] _field;
+        private CellState[,] _stateField;
 
         private GameController _controller;
 
@@ -34,6 +39,7 @@ namespace Game
             ColCount = 25;
 
             _field = new CellColor[RowCount, ColCount];
+            _stateField = new CellState[RowCount, ColCount];
         }
 
         public void Fill()
@@ -58,6 +64,8 @@ namespace Game
                     }
                     else
                         _field[r, c] = CellColor.GRAY;
+
+                    _stateField[r, c] = CellState.REST;
                 }
         }
 
@@ -87,12 +95,18 @@ namespace Game
         {
             for (int r = RowCount - 2; r >= 0; r--)
                 for (int c = ColCount - 1; c >= 0; c--)
-                    _field[r + 1, c] = _field[r, c];                
+                    if(_stateField[r + 1, c] != CellState.SELECTED)
+                        _field[r + 1, c] = _field[r, c];                
         }
 
         public CellColor[,] GetField()
         {
             return _field;
+        }
+
+        public CellState[,] GetStateField()
+        {
+            return _stateField;
         }
 
         public void SelectSameColor(int c)
@@ -107,8 +121,10 @@ namespace Game
             
             while (color == _field[r - i, c])
             {
-               // _field[r - i, c] = CellColor.SELECTED;
                 _field[RowCount - i - 1, c] = _field[r - i, c];
+
+                _stateField[RowCount - i - 1, c] = CellState.SELECTED;
+
                 _field[r - i, c] = CellColor.GRAY;
                 i++;
             }

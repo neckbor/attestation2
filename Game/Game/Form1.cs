@@ -34,6 +34,9 @@ namespace Game
             gameFieldGrid.AllowUserToResizeColumns = false;
             gameFieldGrid.AllowUserToResizeRows = false;
 
+            addLineTimer.Start();
+            timeProgressBar.Value = 0;
+
             FieldRefresh();
         }
 
@@ -45,6 +48,8 @@ namespace Game
         public void FieldRefresh()
         {
             GameField.CellColor[,] field = _controller.GetField();
+            GameField.CellState[,] stateField = _controller.GetStateField();
+
             for (int r = 0; r < _controller.GetRowCount(); r++)
                 for (int c = 0; c < _controller.GetColCount(); c++)
                 {
@@ -54,18 +59,57 @@ namespace Game
                     row.Height = 16;
 
                     if (field[r, c] == GameField.CellColor.BLUE)
-                        gameFieldGrid[c, r].Style.BackColor = Color.MidnightBlue;
+                    {
+                        gameFieldGrid[c, r].Style.BackColor = Color.Blue;
+                        if (stateField[r, c] == GameField.CellState.SELECTED)
+                        {
+                            gameFieldGrid[c, r].Value = 'O';
+                            gameFieldGrid[c, r].Style.ForeColor = Color.Black;
+                        }
+                    }
                     if (field[r, c] == GameField.CellColor.GREEN)
+                    {
                         gameFieldGrid[c, r].Style.BackColor = Color.ForestGreen;
+                        if (stateField[r, c] == GameField.CellState.SELECTED)
+                        {
+                            gameFieldGrid[c, r].Value = 'O';
+                            gameFieldGrid[c, r].Style.ForeColor = Color.Black;
+                        }
+                    }
                     if (field[r, c] == GameField.CellColor.YELLOW)
+                    {
                         gameFieldGrid[c, r].Style.BackColor = Color.Gold;
+                        if (stateField[r, c] == GameField.CellState.SELECTED)
+                        {
+                            gameFieldGrid[c, r].Value = 'O';
+                            gameFieldGrid[c, r].Style.ForeColor = Color.Black;
+                        }
+                    }
                     if (field[r, c] == GameField.CellColor.RED)
+                    {
                         gameFieldGrid[c, r].Style.BackColor = Color.Crimson;
-                    if (field[r, c] == GameField.CellColor.GRAY)
+                        if (stateField[r, c] == GameField.CellState.SELECTED)
+                        {
+                            gameFieldGrid[c, r].Value = 'O';
+                            gameFieldGrid[c, r].Style.ForeColor = Color.Black;
+                        }
+                    }
+                    if (field[r, c] == GameField.CellColor.GRAY )
+                    {
                         gameFieldGrid[c, r].Style.BackColor = Color.Gray;
-                    if (field[r, c] == GameField.CellColor.SELECTED)
-                    { }
+                    }
                 }
+        }
+
+        private void addLineTimer_Tick(object sender, EventArgs e)
+        {
+            timeProgressBar.Value++;
+
+            if (timeProgressBar.Value == timeProgressBar.Maximum)
+            {
+                _controller.AddLine();
+                timeProgressBar.Value = 0;
+            }
         }
     }
 }
