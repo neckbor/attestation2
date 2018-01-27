@@ -193,13 +193,13 @@ namespace Game
             }
         }
 
-        private void ShiftAfterDeleting()
+        public void ShiftAfterDeleting()
         {
             for (int r = RowCount - 1; r > 1; r--)
                 for (int c = 0; c < ColCount; c++)
                     if (_field[r - 1, c] == CellColor.GRAY)
                     {
-                        _field[r, c] = _field[r - 1, c];
+                        _field[r - 1, c] = _field[r, c];
                         _field[r, c] = CellColor.GRAY;
                     }
         }
