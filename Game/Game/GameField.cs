@@ -141,13 +141,47 @@ namespace Game
                                 _field[rowInd, colInd] = _field[r, c];
                                 _field[r, c] = CellColor.GRAY;
                                 _stateField[r, c] = CellState.REST;
+                                BlockDelete(rowInd, colInd);
                                 break;
                             }           
         }
 
-        private void BlockDelete()
+        private void BlockDelete(int rowInd, int colInd)
         {
- 
+            if (rowInd > 0 && _field[rowInd - 1, colInd] == _field[rowInd, colInd])//север
+            {
+                _field[rowInd, colInd] = CellColor.GRAY;
+                BlockDelete(rowInd - 1, colInd);
+            }
+            //if (colInd < ColCount - 1 && _field[rowInd - 1, colInd + 1] == _field[rowInd, colInd])//северо-восток
+            //{
+            //    _field[rowInd, colInd] = CellColor.GRAY;
+            //    BlockDelete(rowInd - 1, colInd + 1);
+            //}
+
+            if (colInd < ColCount - 1 && _field[rowInd, colInd + 1] == _field[rowInd, colInd])//восток
+            {
+                _field[rowInd, colInd] = CellColor.GRAY;
+                BlockDelete(rowInd, colInd + 1);
+            }
+            //if (rowInd < RowCount - 1 && colInd < ColCount - 1 && _field[rowInd + 1, colInd + 1] == _field[rowInd, colInd])//юго-восток
+            //{
+            //    _field[rowInd, colInd] = CellColor.GRAY;
+            //    BlockDelete(rowInd + 1, colInd + 1);
+            //}
+
+            if (rowInd < RowCount - 1 && _field[rowInd + 1, colInd] == _field[rowInd, colInd])//юг
+            {
+                _field[rowInd, colInd] = CellColor.GRAY;
+                BlockDelete(rowInd + 1, colInd);
+            }
+            if (colInd > 0 && _field[rowInd, colInd - 1] == _field[rowInd, colInd])//запад
+            {
+                _field[rowInd, colInd] = CellColor.GRAY;
+                BlockDelete(rowInd, colInd - 1);
+            }
         }
+
+
     }
 }
