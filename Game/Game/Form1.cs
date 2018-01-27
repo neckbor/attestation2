@@ -39,7 +39,7 @@ namespace Game
 
         private void gameFieldGrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            _controller.GetCellIndexes(e.RowIndex, e.ColumnIndex);
+            _controller.GetCellIndexes(e.ColumnIndex);
         }
 
         public void FieldRefresh()

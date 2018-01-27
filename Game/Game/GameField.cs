@@ -95,11 +95,16 @@ namespace Game
             return _field;
         }
 
-        public void SelectSameColor(int r, int c)
+        public void SelectSameColor(int c)
         {
-            int i = 0;
+            int i = 0,
+                r = RowCount - 1;
+
+            while (_field[r, c] == CellColor.GRAY)
+                r--;
+
             CellColor color = _field[r, c];
-            //for (int r = RowCount - 1; r <= 0; r --)
+            
             while (color == _field[r - i, c])
             {
                // _field[r - i, c] = CellColor.SELECTED;
