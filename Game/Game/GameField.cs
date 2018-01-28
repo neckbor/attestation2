@@ -350,11 +350,11 @@ namespace Game
                         r0--;
                         flag = true;
                     }
-                    if (_field[r0, c] != CellColor.GRAY && flag)
-                    {
-                        BlockDelete(r - 1, c);
-                        FieldUpdate();
-                    }
+                    //if (_field[r0, c] != CellColor.GRAY && flag)
+                    //{
+                      //  BlockDelete(r - 1, c);
+                       // FieldUpdate();
+                    //}
                 }
         }
 

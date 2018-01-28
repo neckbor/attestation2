@@ -154,7 +154,7 @@ namespace Game
         public void GameOver()
         {
             addLineTimer.Stop();
-            MessageBox.Show("Лол Надюшка проиграла");
+            MessageBox.Show("Ну шо пoделать..." + Environment.NewLine +  "Ты проиграл :(");
 
             _controller.NewGame();
 
