@@ -130,7 +130,7 @@ namespace Game
                                 gameFieldGrid[c, r].Style.ForeColor = Color.Black;
                             }
                     }
-                    if (field[r, c] == GameField.CellColor.GRAY )
+                    if (field[r, c] == GameField.CellColor.GRAY || stateField[r, c] == GameField.CellState.DELETING)
                     {
                         gameFieldGrid[c, r].Style.BackColor = Color.Gray;
                         gameFieldGrid[c, r].Value = null;

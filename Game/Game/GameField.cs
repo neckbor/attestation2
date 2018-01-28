@@ -157,8 +157,8 @@ namespace Game
 
             BlockDelete(r0, c0);
             //MessageBox.Show("BlockDelete comlete");
-
-           // ShiftAfterDeleting();
+            FieldUpdate();
+            ShiftAfterDeleting();
             NearSameCells = 0;
         }
 
@@ -320,10 +320,18 @@ namespace Game
         }
 
 
-            
+        private void FieldUpdate()
+        {
+            for (int r = 0; r < RowCount; r++)
+                for (int c = 0; c < ColCount; c++)
+                    if (_stateField[r, c] == CellState.DELETING)
+                    {
+                        _field[r, c] = CellColor.GRAY;
+                        _stateField[r, c] = CellState.REST;
+                    }
+        }
 
-        public void ShiftAfterDeleting()
-        
+        public void ShiftAfterDeleting()      
         {
             for (int r = 1; r < RowCount; r++)
                 for (int c = 0; c < ColCount; c++)
@@ -334,10 +342,10 @@ namespace Game
                 //}
                 {
                     int r0 = r;
-                    while (_field[r - 1, c] == CellColor.GRAY && r0 >= 1)
+                    while (_field[r0 - 1, c] == CellColor.GRAY && r0 >= 1)
                     {
-                        _field[r - 1, c] = _field[r, c];
-                        _field[r, c] = CellColor.GRAY;
+                        _field[r0 - 1, c] = _field[r0, c];
+                        _field[r0, c] = CellColor.GRAY;
                         r0--;
                     }
                 }
