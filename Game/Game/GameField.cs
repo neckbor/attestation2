@@ -134,182 +134,355 @@ namespace Game
 
         public void BlockInput(int colInd)
         {
+            int r0 = -1, c0 = -1;
+
             for (int r = 0; r < RowCount; r++)
                 for (int c = 0; c < ColCount; c++)
                     if (_stateField[r, c] == CellState.SELECTED)
-                        for (int rowInd = RowCount - 2; rowInd > 0; rowInd--)
+                    {
+                        for (int rowInd = RowCount - 1; rowInd > 0; rowInd--)
                             if (_field[rowInd - 1, colInd] != CellColor.GRAY)
                             {
                                 _field[rowInd, colInd] = _field[r, c];
-                                _field[r, c] = CellColor.GRAY;
+
                                 _stateField[r, c] = CellState.REST;
-                                BlockDelete(rowInd, colInd, 0);
 
-                                MessageBox.Show("BlockDelete comlete");
-
+                                //BlockDelete(rowInd, colInd);
+                                r0 = rowInd;
+                                c0 = colInd;
                                 break;
                             }
-            ShiftAfterDeleting();
+                        _field[r, c] = CellColor.GRAY;
+                    }
+
+            BlockDelete(r0, c0);
+            //MessageBox.Show("BlockDelete comlete");
+
+           // ShiftAfterDeleting();
             NearSameCells = 0;
         }
 
-        private void BlockDelete(int rowInd, int colInd, int nearSameCells) 
+        private void BlockDelete(int rowInd, int colInd)
         {
+            _stateField[rowInd, colInd] = CellState.DELETING;
+            //если север
+            if (rowInd > 0 && _field[rowInd - 1, colInd] == _field[rowInd, colInd] && _stateField[rowInd - 1, colInd] != CellState.DELETING)//север
+            {
+                _stateField[rowInd, colInd] = CellState.DELETING;
+                BlockDelete(rowInd - 1, colInd);
 
-            //switch (nearSameCells)
-            //{
-            //    case 0:
-            //        if (rowInd > 0 && _field[rowInd - 1, colInd] == _field[rowInd, colInd] && _stateField[rowInd - 1, colInd] != CellState.DELETING)//север
-            //        {
-            //            _stateField[rowInd, colInd] = CellState.DELETING;
-            //            BlockDelete(rowInd - 1, colInd, 0);
+                //MessageBox.Show("Иду на север " + rowInd.ToString() + ',' + colInd.ToString());
 
-            //            MessageBox.Show("Иду на север " + (rowInd - 1).ToString() + ',' + colInd.ToString());
+                //nearSameCells++;
 
-            //            nearSameCells++;
-            //        }
-            //        break;
-            //    case 1:
-            //        if (colInd < ColCount - 1 && _field[rowInd, colInd + 1] == _field[rowInd, colInd] && _stateField[rowInd, colInd + 1] != CellState.DELETING)//восток
-            //        {
-            //            _stateField[rowInd, colInd] = CellState.DELETING;
-            //            BlockDelete(rowInd, colInd + 1, 0);
+                if (colInd < ColCount - 1 && _field[rowInd, colInd + 1] == _field[rowInd, colInd] && _stateField[rowInd, colInd + 1] != CellState.DELETING)//восток
+                {
+                    _stateField[rowInd, colInd] = CellState.DELETING;
+                    BlockDelete(rowInd, colInd + 1);
 
-            //            MessageBox.Show("Иду на север " + rowInd.ToString() + ',' + (colInd + 1).ToString());
+                    //MessageBox.Show("Иду на восток " + rowInd.ToString() + ',' + colInd.ToString());
 
-            //            nearSameCells++;
-            //        }
-            //        break;
-            //    case 2:
-            //        if (rowInd < RowCount - 1 && _field[rowInd + 1, colInd] == _field[rowInd, colInd] && _stateField[rowInd + 1, colInd] != CellState.DELETING)//юг
-            //        {
-            //            _stateField[rowInd, colInd] = CellState.DELETING;
-            //            BlockDelete(rowInd + 1, colInd, 0);
+                    //nearSameCells++;
 
-            //            MessageBox.Show("Иду на север " + (rowInd + 1).ToString() + ',' + colInd.ToString());
+                    if (rowInd < RowCount - 1 && _field[rowInd + 1, colInd] == _field[rowInd, colInd] && _stateField[rowInd + 1, colInd] != CellState.DELETING)//юг
+                    {
+                        _stateField[rowInd, colInd] = CellState.DELETING;
+                        BlockDelete(rowInd + 1, colInd);
 
-            //            nearSameCells++;
-            //        }
-            //        break;
-            //    case 3:
-            //        if (colInd > 0 && _field[rowInd, colInd - 1] == _field[rowInd, colInd] && _stateField[rowInd, colInd - 1] != CellState.DELETING)//запад
-            //        {
-            //            _stateField[rowInd, colInd] = CellState.DELETING;
-            //            BlockDelete(rowInd, colInd - 1, 0);
+                        //MessageBox.Show("Иду на юг " + rowInd.ToString() + ',' + colInd.ToString());
 
-            //            MessageBox.Show("Иду на север " + rowInd.ToString() + ',' + (colInd - 1).ToString());
+                        //nearSameCells++;
 
-            //            nearSameCells++;
-            //        }
-            //        break;
-            //    default:
-            //        BlockDelete(rowInd, colInd, 0);
-            //        break;
-            //}
+                        if (colInd > 0 && _field[rowInd, colInd - 1] == _field[rowInd, colInd] && _stateField[rowInd, colInd - 1] != CellState.DELETING)//запад
+                        {
+                            _stateField[rowInd, colInd] = CellState.DELETING;
+                            BlockDelete(rowInd, colInd - 1);
 
+                            //MessageBox.Show("Иду на запад " + rowInd.ToString() + ',' + colInd.ToString());
 
+                            //nearSameCells++;
+                        }
+                    }
 
-            //if (nearSameCells >= 4)
-              //  return;
+                    if (colInd > 0 && _field[rowInd, colInd - 1] == _field[rowInd, colInd] && _stateField[rowInd, colInd - 1] != CellState.DELETING)//запад
+                    {
+                        _stateField[rowInd, colInd] = CellState.DELETING;
+                        BlockDelete(rowInd, colInd - 1);
 
-            //if ((nearSameCells == 0 || nearSameCells >= 4) && rowInd > 0 && _field[rowInd - 1, colInd] == _field[rowInd, colInd] && _stateField[rowInd - 1, colInd] != CellState.DELETING)//север
-            //{
-            //    _stateField[rowInd, colInd] = CellState.DELETING;
-            //    BlockDelete(rowInd - 1, colInd, 0);
+                        //MessageBox.Show("Иду на запад " + rowInd.ToString() + ',' + colInd.ToString());
 
-            //    MessageBox.Show("Иду на север " + (rowInd - 1).ToString() + ',' + colInd.ToString());
+                        //nearSameCells++;
+                    }
+                }
 
-            //    nearSameCells++;
-            //}
-            //else
-            //    if ((nearSameCells == 1 || nearSameCells >= 4) && colInd < ColCount - 1 && _field[rowInd, colInd + 1] == _field[rowInd, colInd] && _stateField[rowInd, colInd + 1] != CellState.DELETING)//восток
-            //    {
-            //        _stateField[rowInd, colInd] = CellState.DELETING;
-            //        BlockDelete(rowInd, colInd + 1, 0);
+                if (colInd > 0 && _field[rowInd, colInd - 1] == _field[rowInd, colInd] && _stateField[rowInd, colInd - 1] != CellState.DELETING)//запад
+                {
+                    _stateField[rowInd, colInd] = CellState.DELETING;
+                    BlockDelete(rowInd, colInd - 1);
 
-            //        MessageBox.Show("Иду на север " + rowInd.ToString() + ',' + (colInd + 1).ToString());
+                    //MessageBox.Show("Иду на запад " + rowInd.ToString() + ',' + colInd.ToString());
 
-            //        nearSameCells++;
-            //    }
-            //    else
-            //        if ((nearSameCells == 2 || nearSameCells >= 4) && rowInd < RowCount - 1 && _field[rowInd + 1, colInd] == _field[rowInd, colInd] && _stateField[rowInd + 1, colInd] != CellState.DELETING)//юг
-            //        {
-            //            _stateField[rowInd, colInd] = CellState.DELETING;
-            //            BlockDelete(rowInd + 1, colInd, 0);
+                    //nearSameCells++;
 
-            //            MessageBox.Show("Иду на север " + (rowInd + 1).ToString() + ',' + colInd.ToString());
-                
-            //            nearSameCells++;
-            //        }
-            //        else
-            //            if ((nearSameCells == 3 || nearSameCells >= 4) && colInd > 0 && _field[rowInd, colInd - 1] == _field[rowInd, colInd] && _stateField[rowInd, colInd - 1] != CellState.DELETING)//запад
-            //            {
-            //                _stateField[rowInd, colInd] = CellState.DELETING;
-            //                BlockDelete(rowInd, colInd - 1, 0);
+                    if (rowInd < RowCount - 1 && _field[rowInd + 1, colInd] == _field[rowInd, colInd] && _stateField[rowInd + 1, colInd] != CellState.DELETING)//юг
+                    {
+                        _stateField[rowInd, colInd] = CellState.DELETING;
+                        BlockDelete(rowInd + 1, colInd);
 
-            //                MessageBox.Show("Иду на север " + rowInd.ToString() + ',' + (colInd - 1).ToString());
-                
-            //                nearSameCells++;
-            //            }
+                        //MessageBox.Show("Иду на юг " + rowInd.ToString() + ',' + colInd.ToString());
 
-            //if (rowInd > 0 && _field[rowInd - 1, colInd] == _field[rowInd, colInd] && NearSameCells < 1000)//север
-            //{
-            //    if (NearSameCells >= 4)
-            //        _stateField[rowInd, colInd] = CellState.DELETING;
-            //    NearSameCells++;
-            //    BlockDelete(rowInd - 1, colInd);
-            //}
-            ////if (colInd < ColCount - 1 && _field[rowInd - 1, colInd + 1] == _field[rowInd, colInd])//северо-восток
-            ////{
-            ////    _field[rowInd, colInd] = CellColor.GRAY;
-            ////    BlockDelete(rowInd - 1, colInd + 1);
-            ////}
+                        //nearSameCells++;
+                    }
+                }
+                if (rowInd < RowCount - 1 && _field[rowInd + 1, colInd] == _field[rowInd, colInd] && _stateField[rowInd + 1, colInd] != CellState.DELETING)//юг
+                {
+                    _stateField[rowInd, colInd] = CellState.DELETING;
+                    BlockDelete(rowInd + 1, colInd);
 
-            //if (colInd < ColCount - 1 && _field[rowInd, colInd + 1] == _field[rowInd, colInd] && NearSameCells < 1000)//восток
-            //{
-            //    if (NearSameCells >= 4)
-            //        _stateField[rowInd, colInd] = CellState.DELETING;
-            //    NearSameCells++;
-            //    BlockDelete(rowInd, colInd + 1);
-            //}
-            ////if (rowInd < RowCount - 1 && colInd < ColCount - 1 && _field[rowInd + 1, colInd + 1] == _field[rowInd, colInd])//юго-восток
-            ////{
-            ////    _field[rowInd, colInd] = CellColor.GRAY;
-            ////    BlockDelete(rowInd + 1, colInd + 1);
-            ////}
+                    //MessageBox.Show("Иду на юг " + rowInd.ToString() + ',' + colInd.ToString());
 
-            //if (rowInd < RowCount - 1 && _field[rowInd + 1, colInd] == _field[rowInd, colInd] && NearSameCells < 1000)//юг
-            //{
-            //    if (NearSameCells >= 4)
-            //        _stateField[rowInd, colInd] = CellState.DELETING;
-            //    NearSameCells++;
-            //    BlockDelete(rowInd + 1, colInd);
-            //}
-            //if (colInd > 0 && _field[rowInd, colInd - 1] == _field[rowInd, colInd] && NearSameCells < 1000)//запад
-            //{
-            //    if (NearSameCells >= 4)
-            //        _stateField[rowInd, colInd] = CellState.DELETING;
-            //    NearSameCells++;
-            //    BlockDelete(rowInd, colInd - 1);
-            //}
+                    //nearSameCells++;
+                }
+            }
+
+            //если севера нет
+            if (colInd < ColCount - 1 && _field[rowInd, colInd + 1] == _field[rowInd, colInd] && _stateField[rowInd, colInd + 1] != CellState.DELETING)//восток
+            {
+                _stateField[rowInd, colInd] = CellState.DELETING;
+                BlockDelete(rowInd, colInd + 1);
+
+                //MessageBox.Show("Иду на восток " + rowInd.ToString() + ',' + colInd.ToString());
+
+                //nearSameCells++;
+
+                if (rowInd < RowCount - 1 && _field[rowInd + 1, colInd] == _field[rowInd, colInd] && _stateField[rowInd + 1, colInd] != CellState.DELETING)//юг
+                {
+                    _stateField[rowInd, colInd] = CellState.DELETING;
+                    BlockDelete(rowInd + 1, colInd);
+
+                    //MessageBox.Show("Иду на юг " + rowInd.ToString() + ',' + colInd.ToString());
+
+                    //nearSameCells++;
+
+                    if (colInd > 0 && _field[rowInd, colInd - 1] == _field[rowInd, colInd] && _stateField[rowInd, colInd - 1] != CellState.DELETING)//запад
+                    {
+                        _stateField[rowInd, colInd] = CellState.DELETING;
+                        BlockDelete(rowInd, colInd - 1);
+
+                        //MessageBox.Show("Иду на запад " + rowInd.ToString() + ',' + colInd.ToString());
+
+                        //nearSameCells++;
+                    }
+                }
+
+                if (colInd > 0 && _field[rowInd, colInd - 1] == _field[rowInd, colInd] && _stateField[rowInd, colInd - 1] != CellState.DELETING)//запад
+                {
+                    _stateField[rowInd, colInd] = CellState.DELETING;
+                    BlockDelete(rowInd, colInd - 1);
+
+                    //MessageBox.Show("Иду на запад " + rowInd.ToString() + ',' + colInd.ToString());
+
+                    //nearSameCells++;
+                }
+            }
+
+            //если нет ни севера, ни востока
+            if (rowInd < RowCount - 1 && _field[rowInd + 1, colInd] == _field[rowInd, colInd] && _stateField[rowInd + 1, colInd] != CellState.DELETING)//юг
+            {
+                _stateField[rowInd, colInd] = CellState.DELETING;
+                BlockDelete(rowInd + 1, colInd);
+
+                //MessageBox.Show("Иду на юг " + rowInd.ToString() + ',' + colInd.ToString());
+
+                //nearSameCells++;
+
+                if (colInd > 0 && _field[rowInd, colInd - 1] == _field[rowInd, colInd] && _stateField[rowInd, colInd - 1] != CellState.DELETING)//запад
+                {
+                    _stateField[rowInd, colInd] = CellState.DELETING;
+                    BlockDelete(rowInd, colInd - 1);
+
+                    //MessageBox.Show("Иду на запад " + rowInd.ToString() + ',' + colInd.ToString());
+
+                    //nearSameCells++;
+                }
+            }
+
+            //если ни севера, ни востока, ни юга
+            if (colInd > 0 && _field[rowInd, colInd - 1] == _field[rowInd, colInd] && _stateField[rowInd, colInd - 1] != CellState.DELETING)//запад
+            {
+                _stateField[rowInd, colInd] = CellState.DELETING;
+                BlockDelete(rowInd, colInd - 1);
+
+                //MessageBox.Show("Иду на запад " + rowInd.ToString() + ',' + colInd.ToString());
+
+                //nearSameCells++;
+            }
         }
 
+
+            
+
         public void ShiftAfterDeleting()
+        
         {
             for (int r = 1; r < RowCount; r++)
                 for (int c = 0; c < ColCount; c++)
-                    //if (_field[r - 1, c] == CellColor.GRAY)
-                    //{
-                    //    _field[r - 1, c] = _field[r, c];
-                    //    _field[r, c] = CellColor.GRAY;
-                    //}
-                    while (_field[r - 1, c] == CellColor.GRAY && r >= 1)
+                //if (_field[r - 1, c] == CellColor.GRAY)
+                //{
+                //    _field[r - 1, c] = _field[r, c];
+                //    _field[r, c] = CellColor.GRAY;
+                //}
+                {
+                    int r0 = r;
+                    while (_field[r - 1, c] == CellColor.GRAY && r0 >= 1)
                     {
                         _field[r - 1, c] = _field[r, c];
-                        r--;
+                        _field[r, c] = CellColor.GRAY;
+                        r0--;
                     }
+                }
         }
-
-
     }
 }
+
+//    if (rowInd < RowCount - 1 && _field[rowInd + 1, colInd] == _field[rowInd, colInd] && _stateField[rowInd + 1, colInd] != CellState.DELETING)//юг
+//    {
+//        _stateField[rowInd, colInd] = CellState.DELETING;
+//        BlockDelete(rowInd + 1, colInd, 0);
+
+//        MessageBox.Show("Иду на север " + (rowInd + 1).ToString() + ',' + colInd.ToString());
+
+//        nearSameCells++;
+//    }
+//}
+//    if (colInd < ColCount - 1 && _field[rowInd, colInd + 1] == _field[rowInd, colInd] && _stateField[rowInd, colInd + 1] != CellState.DELETING)//восток
+//    {
+//        _stateField[rowInd, colInd] = CellState.DELETING;
+//        BlockDelete(rowInd, colInd + 1, 0);
+
+//        MessageBox.Show("Иду на север " + rowInd.ToString() + ',' + (colInd + 1).ToString());
+
+//        nearSameCells++;
+//    }
+
+//        if (rowInd < RowCount - 1 && _field[rowInd + 1, colInd] == _field[rowInd, colInd] && _stateField[rowInd + 1, colInd] != CellState.DELETING)//юг
+//        {
+//            _stateField[rowInd, colInd] = CellState.DELETING;
+//            BlockDelete(rowInd + 1, colInd, 0);
+
+//            MessageBox.Show("Иду на север " + (rowInd + 1).ToString() + ',' + colInd.ToString());
+
+//            nearSameCells++;
+//        }
+
+//            if (colInd > 0 && _field[rowInd, colInd - 1] == _field[rowInd, colInd] && _stateField[rowInd, colInd - 1] != CellState.DELETING)//запад
+//            {
+//                _stateField[rowInd, colInd] = CellState.DELETING;
+//                BlockDelete(rowInd, colInd - 1, 0);
+
+//                MessageBox.Show("Иду на север " + rowInd.ToString() + ',' + (colInd - 1).ToString());
+
+//                nearSameCells++;
+//            }
+
+//if (rowInd > 0 && _field[rowInd - 1, colInd] == _field[rowInd, colInd] && NearSameCells < 1000)//север
+//{
+//    if (NearSameCells >= 4)
+//        _stateField[rowInd, colInd] = CellState.DELETING;
+//    NearSameCells++;
+//    BlockDelete(rowInd - 1, colInd);
+//}
+////if (colInd < ColCount - 1 && _field[rowInd - 1, colInd + 1] == _field[rowInd, colInd])//северо-восток
+////{
+////    _field[rowInd, colInd] = CellColor.GRAY;
+////    BlockDelete(rowInd - 1, colInd + 1);
+////}
+
+//if (colInd < ColCount - 1 && _field[rowInd, colInd + 1] == _field[rowInd, colInd] && NearSameCells < 1000)//восток
+//{
+//    if (NearSameCells >= 4)
+//        _stateField[rowInd, colInd] = CellState.DELETING;
+//    NearSameCells++;
+//    BlockDelete(rowInd, colInd + 1);
+//}
+////if (rowInd < RowCount - 1 && colInd < ColCount - 1 && _field[rowInd + 1, colInd + 1] == _field[rowInd, colInd])//юго-восток
+////{
+////    _field[rowInd, colInd] = CellColor.GRAY;
+////    BlockDelete(rowInd + 1, colInd + 1);
+////}
+
+//if (rowInd < RowCount - 1 && _field[rowInd + 1, colInd] == _field[rowInd, colInd] && NearSameCells < 1000)//юг
+//{
+//    if (NearSameCells >= 4)
+//        _stateField[rowInd, colInd] = CellState.DELETING;
+//    NearSameCells++;
+//    BlockDelete(rowInd + 1, colInd);
+//}
+//if (colInd > 0 && _field[rowInd, colInd - 1] == _field[rowInd, colInd] && NearSameCells < 1000)//запад
+//{
+//    if (NearSameCells >= 4)
+//        _stateField[rowInd, colInd] = CellState.DELETING;
+//    NearSameCells++;
+//    BlockDelete(rowInd, colInd - 1);
+//}
+
+
+
+
+
+
+//switch (nearSameCells)
+//{
+//    case 0:
+//        if (rowInd > 0 && _field[rowInd - 1, colInd] == _field[rowInd, colInd] && _stateField[rowInd - 1, colInd] != CellState.DELETING)//север
+//        {
+//            _stateField[rowInd, colInd] = CellState.DELETING;
+//            BlockDelete(rowInd - 1, colInd, 0);
+
+//            MessageBox.Show("Иду на север " + (rowInd - 1).ToString() + ',' + colInd.ToString());
+
+//            nearSameCells++;
+//        }
+//        break;
+//    case 1:
+//        if (colInd < ColCount - 1 && _field[rowInd, colInd + 1] == _field[rowInd, colInd] && _stateField[rowInd, colInd + 1] != CellState.DELETING)//восток
+//        {
+//            _stateField[rowInd, colInd] = CellState.DELETING;
+//            BlockDelete(rowInd, colInd + 1, 0);
+
+//            MessageBox.Show("Иду на север " + rowInd.ToString() + ',' + (colInd + 1).ToString());
+
+//            nearSameCells++;
+//        }
+//        break;
+//    case 2:
+//        if (rowInd < RowCount - 1 && _field[rowInd + 1, colInd] == _field[rowInd, colInd] && _stateField[rowInd + 1, colInd] != CellState.DELETING)//юг
+//        {
+//            _stateField[rowInd, colInd] = CellState.DELETING;
+//            BlockDelete(rowInd + 1, colInd, 0);
+
+//            MessageBox.Show("Иду на север " + (rowInd + 1).ToString() + ',' + colInd.ToString());
+
+//            nearSameCells++;
+//        }
+//        break;
+//    case 3:
+//        if (colInd > 0 && _field[rowInd, colInd - 1] == _field[rowInd, colInd] && _stateField[rowInd, colInd - 1] != CellState.DELETING)//запад
+//        {
+//            _stateField[rowInd, colInd] = CellState.DELETING;
+//            BlockDelete(rowInd, colInd - 1, 0);
+
+//            MessageBox.Show("Иду на север " + rowInd.ToString() + ',' + (colInd - 1).ToString());
+
+//            nearSameCells++;
+//        }
+//        break;
+//    default:
+//        BlockDelete(rowInd, colInd, 0);
+//        break;
+//}
+
+
+
+//if (nearSameCells >= 4)
+//  return;
