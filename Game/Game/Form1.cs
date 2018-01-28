@@ -78,6 +78,12 @@ namespace Game
                             gameFieldGrid[c, r].Value = 'O';
                             gameFieldGrid[c, r].Style.ForeColor = Color.Black;
                         }
+                        else
+                            if (stateField[r, c] == GameField.CellState.DELETING)
+                            {
+                                gameFieldGrid[c, r].Value = 'X';
+                                gameFieldGrid[c, r].Style.ForeColor = Color.Black;
+                            }
                     }
                     if (field[r, c] == GameField.CellColor.GREEN)
                     {
@@ -87,6 +93,12 @@ namespace Game
                             gameFieldGrid[c, r].Value = 'O';
                             gameFieldGrid[c, r].Style.ForeColor = Color.Black;
                         }
+                        else
+                            if (stateField[r, c] == GameField.CellState.DELETING)
+                            {
+                                gameFieldGrid[c, r].Value = 'X';
+                                gameFieldGrid[c, r].Style.ForeColor = Color.Black;
+                            }
                     }
                     if (field[r, c] == GameField.CellColor.YELLOW)
                     {
@@ -96,6 +108,12 @@ namespace Game
                             gameFieldGrid[c, r].Value = 'O';
                             gameFieldGrid[c, r].Style.ForeColor = Color.Black;
                         }
+                        else
+                            if (stateField[r, c] == GameField.CellState.DELETING)
+                            {
+                                gameFieldGrid[c, r].Value = 'X';
+                                gameFieldGrid[c, r].Style.ForeColor = Color.Black;
+                            }
                     }
                     if (field[r, c] == GameField.CellColor.RED)
                     {
@@ -105,6 +123,12 @@ namespace Game
                             gameFieldGrid[c, r].Value = 'O';
                             gameFieldGrid[c, r].Style.ForeColor = Color.Black;
                         }
+                        else
+                            if (stateField[r, c] == GameField.CellState.DELETING)
+                            {
+                                gameFieldGrid[c, r].Value = 'X';
+                                gameFieldGrid[c, r].Style.ForeColor = Color.Black;
+                            }
                     }
                     if (field[r, c] == GameField.CellColor.GRAY )
                     {
@@ -116,13 +140,13 @@ namespace Game
 
         private void addLineTimer_Tick(object sender, EventArgs e)
         {
-            timeProgressBar.Value++;
+        //    timeProgressBar.Value++;
 
-            if (timeProgressBar.Value == timeProgressBar.Maximum)
-            {
-                _controller.AddLine();
-                timeProgressBar.Value = 0;
-            }
+        //    if (timeProgressBar.Value == timeProgressBar.Maximum)
+        //    {
+        //        _controller.AddLine();
+        //        timeProgressBar.Value = 0;
+        //    }
         }
     }
 }
