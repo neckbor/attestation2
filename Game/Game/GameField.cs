@@ -331,7 +331,7 @@ namespace Game
                     }
         }
 
-        private void ShiftAfterDeleting()      
+        private void ShiftAfterDeleting()
         {
             for (int r = 1; r < RowCount; r++)
                 for (int c = 0; c < ColCount; c++)
@@ -341,12 +341,19 @@ namespace Game
                 //    _field[r, c] = CellColor.GRAY;
                 //}
                 {
+                    bool flag = false;
                     int r0 = r;
-                    while (_field[r0 - 1, c] == CellColor.GRAY && r0 >= 1)
+                    while (_field[r0 - 1, c] == CellColor.GRAY && r0 > 1)
                     {
                         _field[r0 - 1, c] = _field[r0, c];
                         _field[r0, c] = CellColor.GRAY;
                         r0--;
+                        flag = true;
+                    }
+                    if (_field[r0, c] != CellColor.GRAY && flag)
+                    {
+                        BlockDelete(r - 1, c);
+                        FieldUpdate();
                     }
                 }
         }
