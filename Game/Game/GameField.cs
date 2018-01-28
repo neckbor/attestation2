@@ -354,7 +354,7 @@ namespace Game
         public bool IsLost()
         {
             for (int c = 0; c < ColCount; c++)
-                if (_field[14, c] != CellColor.GRAY)
+                if (_field[14, c] != CellColor.GRAY && _stateField[14, c] == CellState.REST)
                     return true;
             return false;
         }

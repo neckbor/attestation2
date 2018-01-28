@@ -147,12 +147,14 @@ namespace Game
                 _controller.AddLine();
                 timeProgressBar.Value = 0;
             }
+
+            _controller.LooseDetect();
         }
 
         public void GameOver()
         {
-            MessageBox.Show("Лол Надюшка проиграла");
             addLineTimer.Stop();
+            MessageBox.Show("Лол Надюшка проиграла");
 
             _controller.NewGame();
 
