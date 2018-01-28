@@ -331,7 +331,7 @@ namespace Game
                     }
         }
 
-        public void ShiftAfterDeleting()      
+        private void ShiftAfterDeleting()      
         {
             for (int r = 1; r < RowCount; r++)
                 for (int c = 0; c < ColCount; c++)
@@ -349,6 +349,14 @@ namespace Game
                         r0--;
                     }
                 }
+        }
+
+        public bool IsLost()
+        {
+            for (int c = 0; c < ColCount; c++)
+                if (_field[14, c] != CellColor.GRAY)
+                    return true;
+            return false;
         }
     }
 }

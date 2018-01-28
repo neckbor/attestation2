@@ -66,5 +66,17 @@ namespace Game
             _model.BlockInput(c);
             _view.FieldRefresh();
         }
+
+        public void LooseDetect()
+        {
+            if (_model.IsLost())
+                _view.GameOver();
+        }
+
+        public void NewGame()
+        {
+            _model.Fill();
+            _view.FieldRefresh();
+        }
     }
 }

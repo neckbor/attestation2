@@ -140,13 +140,24 @@ namespace Game
 
         private void addLineTimer_Tick(object sender, EventArgs e)
         {
-        //    timeProgressBar.Value++;
+            timeProgressBar.Value++;
 
-        //    if (timeProgressBar.Value == timeProgressBar.Maximum)
-        //    {
-        //        _controller.AddLine();
-        //        timeProgressBar.Value = 0;
-        //    }
+            if (timeProgressBar.Value == timeProgressBar.Maximum)
+            {
+                _controller.AddLine();
+                timeProgressBar.Value = 0;
+            }
+        }
+
+        public void GameOver()
+        {
+            MessageBox.Show("Лол Надюшка проиграла");
+            addLineTimer.Stop();
+
+            _controller.NewGame();
+
+            addLineTimer.Start();
+            timeProgressBar.Value = 0;
         }
     }
 }

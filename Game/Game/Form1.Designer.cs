@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gameFieldGrid = new System.Windows.Forms.DataGridView();
             this.timeProgressBar = new System.Windows.Forms.ProgressBar();
             this.addLineTimer = new System.Windows.Forms.Timer(this.components);
@@ -40,14 +40,14 @@
             // 
             this.gameFieldGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gameFieldGrid.Cursor = System.Windows.Forms.Cursors.Hand;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.MenuHighlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gameFieldGrid.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.MenuHighlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gameFieldGrid.DefaultCellStyle = dataGridViewCellStyle1;
             this.gameFieldGrid.Location = new System.Drawing.Point(13, 13);
             this.gameFieldGrid.MultiSelect = false;
             this.gameFieldGrid.Name = "gameFieldGrid";
@@ -63,12 +63,12 @@
             this.timeProgressBar.ForeColor = System.Drawing.SystemColors.ControlText;
             this.timeProgressBar.Location = new System.Drawing.Point(12, 260);
             this.timeProgressBar.MarqueeAnimationSpeed = 200;
-            this.timeProgressBar.Maximum = 15;
+            this.timeProgressBar.Maximum = 5;
             this.timeProgressBar.Name = "timeProgressBar";
             this.timeProgressBar.Size = new System.Drawing.Size(400, 10);
             this.timeProgressBar.Step = 1;
             this.timeProgressBar.TabIndex = 1;
-            this.timeProgressBar.Value = 12;
+            this.timeProgressBar.Value = 5;
             // 
             // addLineTimer
             // 
