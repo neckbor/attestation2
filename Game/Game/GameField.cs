@@ -157,6 +157,8 @@ namespace Game
 
             BlockDelete(r0, c0);
             //MessageBox.Show("BlockDelete comlete");
+            DeletedCellsCount();
+
             FieldUpdate();
             ShiftAfterDeleting();
             NearSameCells = 0;
@@ -319,6 +321,19 @@ namespace Game
             }
         }
 
+        private void DeletedCellsCount()
+        {
+            int count = 0;
+
+            for (int r = 0; r < RowCount; r++)
+                for (int c = 0; c < ColCount; c++)
+                    if (_stateField[r, c] == CellState.DELETING)
+                        count++;
+            if (count < 3)
+                for (int r = 0; r < RowCount; r++)
+                    for (int c = 0; c < ColCount; c++)
+                        _stateField[r, c] = CellState.REST;
+        }
 
         private void FieldUpdate()
         {
